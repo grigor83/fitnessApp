@@ -1,0 +1,15 @@
+
+
+<header>
+    <button [style.visibility]="(sharedService.buttonVisibility$ | async) ? 'hidden' : 'visible'" (click)="homePage()">Naslovna</button>
+    <h1>fitnessApp</h1>
+    <div class="button-container">
+        <button *ngIf="!(sharedService.buttonVisibility2$ | async)" (click)="login()">Prijava</button>
+        <button *ngIf="!(sharedService.buttonVisibility2$ | async)" (click)="register()">Registracija</button>
+        <button *ngIf="sharedService.buttonVisibility2$ | async" (click)="userPage()">
+            <img *ngIf="userService.activeUser?.avatar" [src]=userService.activeUser?.avatar style="width: 20px; height: 20px; float: left;">
+            {{ userService.activeUser?.korisnickoIme }}
+        </button>
+        <button *ngIf="sharedService.buttonVisibility2$ | async" (click)="logout()">Odjava</button>
+    </div>
+</header>

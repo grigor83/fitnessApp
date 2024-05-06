@@ -1,0 +1,30 @@
+
+.example-card {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    max-width: 100%; /* Ensure the container does not exceed the width of its parent */
+    background-color: lightgreen;
+}
+
+mat-card-title {
+    font-size: large;
+}
+
+mat-card-content {
+    padding: 10px;
+    text-align: justify;
+}
+
+mat-card-content a {
+    word-break: break-all;
+}
+
+@media (max-width: 768px) {
+    mat-card-content {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      align-items: center; /* Center items vertically */
+      gap: 0px; 
+      max-height: 50%;
+    }
+}

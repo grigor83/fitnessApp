@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Cijena programa: {{ fitnessProgram.cijena }} KM</h2>
+
+<mat-dialog-content>
+  <form #payingForm="ngForm" ngNativeValidate (ngSubmit)="payProgram(payingForm)" id="payingForm">
+    <label>Način plaćanja*: </label>
+    <select [(ngModel)]="selectedValue" name="način" required>
+      <option *ngFor="let item of items" [value]="item">{{ item }}</option>
+    </select>
+    <label>Broj kartice*:</label>
+    <input type="text" ngModel name="brojKartice" required [disabled]="selectedValue === 'lično' || selectedValue === '' ">
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button type="submit" form="payingForm">Plati</button>
+  <button mat-button mat-dialog-close>Otkaži</button>
+</mat-dialog-actions>

@@ -1,0 +1,31 @@
+.mat-tab-group {
+    margin-bottom: 48px;
+  }
+
+input[type="file"] {
+    display: none;
+}
+
+input {
+    width : 160px;
+}
+
+select {
+    width: 170px;
+    height: 23px;
+}
+
+label, button {
+    display: inline-block;
+    width : 140px;
+    border: 2px solid #ccc;
+    margin : 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: lightslategray;
+}
+
+button {
+    background-color: lightgreen;
+}
+

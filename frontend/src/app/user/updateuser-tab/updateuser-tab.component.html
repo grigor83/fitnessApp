@@ -1,0 +1,30 @@
+
+<form #updateUserForm="ngForm" ngNativeValidate (ngSubmit)="onUpdateUser(updateUserForm)" style="width: 420px; margin: 30px; text-align: center;">
+    <h2 mat-dialog-title>Unesi nove podatke</h2>
+
+    <label>Ime i prezime: </label>
+    <input type="text" [(ngModel)]="user.ime" name="name" required>
+    <label>Grad: </label>
+    <input type="text" [(ngModel)]="user.grad" name="city" required>
+    <label>Lozinka: </label>
+    <input type="password" [(ngModel)]="user.lozinka" name="password" required>
+    <label>Email: </label>
+    <input type="email" [(ngModel)]="user.mejl" name="email" required>
+    <label>Broj kartice: </label>
+    <input type="text" [(ngModel)]="user.brojKartice" name="cardnumber" required>
+    <label>Avatar: </label>
+    <mat-select [(ngModel)]="user.avatar" name="avatar">
+      <mat-option *ngFor="let avatarUrl of avatarUrls" [value]="avatarUrl">
+        <img [src]="avatarUrl" style="max-height: 40px; max-width: 40px;"> {{avatarUrl.split('/')[1]}}
+      </mat-option>
+    </mat-select>
+    <label>Pretplata: </label>
+    <select  [ngModel]="user.pretplata?.kategorijaId" name="pretplata">
+      <option *ngFor="let category of categoriesList" [value]="category.kategorijaId">{{ category.nazivKategorije + '-' + category.atribut.nazivAtributa }}</option>
+      <option [value]="-1">{{selectedValue}}</option>
+    </select>
+
+    <div style="margin-top: 25px;">
+        <button type="submit">Promijeni</button>
+    </div>
+</form>

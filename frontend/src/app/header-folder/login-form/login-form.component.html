@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Prijava</h2>
+
+<mat-dialog-content align="center">
+  <form #loginForm="ngForm" ngNativeValidate (ngSubmit)="login(loginForm)" id="loginForm">
+    <label>Korisničko ime: </label>
+    <input type="text" ngModel name="username" required>
+    <label>Lozinka: </label>
+    <input type="password" ngModel name="password" required>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button type="submit" form="loginForm">Uloguj</button>
+  <button mat-button mat-dialog-close>Otkaži</button>
+</mat-dialog-actions>

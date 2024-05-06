@@ -1,0 +1,9 @@
+
+
+td, th {
+    text-align: center;
+}
+
+th {
+    background-color: lightslategray !important;
+}

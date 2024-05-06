@@ -1,0 +1,36 @@
+<form #myForm="ngForm" ngNativeValidate (ngSubmit)="updateProgram($event, myForm)" style="width: 420px; margin: 30px; text-align: center;">
+    <h2 mat-dialog-title>Promijeni podatke</h2>
+
+    <label>Naziv programa*: </label>
+    <input type="text" [(ngModel)]="program.nazivPrograma" name="nazivPrograma" required>
+    <label>Opis programa*: </label>
+    <input type="text" [(ngModel)]="program.opis" name="opis" required>
+    <label>Kategorija*: </label>
+    <select name="kategorija" [(ngModel)]="program.kategorija.kategorijaId" required>
+      <option *ngFor="let category of categoriesList" [value]="category.kategorijaId">{{ category.nazivKategorije + '-' + category.atribut.nazivAtributa }}</option>
+    </select>
+    <label>Lokacija*: </label>
+    <input type="text" [(ngModel)]="program.lokacija" name="lokacija" required> 
+    <label>Trajanje treninga*: </label>
+    <input type="text" [(ngModel)]="program.trajanje" name="trajanjeTreninga" required>  
+    <label>Nivo težine*: </label>
+    <input type="number" min="1" max="5" [(ngModel)]="program.nivoTezine" name="nivoTezine" required type="number">  <br/>
+    <label>Cijena*: </label>
+    <input type="number" min="5" [(ngModel)]="program.cijena" name="cijena" required type="number">  <br/>
+    <label>Instruktor*: </label>
+    <input type="text" [(ngModel)]="program.imeInstruktora" name="instruktor" required> 
+    <label>Kontakt*: </label>
+    <input type="text" [(ngModel)]="program.kontakt" name="kontakt" required> 
+  
+    <div style ="text-align:center;">
+      <label>
+        Izaberi sliku* <input type="file" name="slika" accept="image/*" (change)="onFileSelected($event)"/>
+      </label>
+      <div *ngIf="!isImageSelected" style="color: red;">Izaberite jednu sliku.</div>
+    </div>
+
+    <div style="margin-top: 50px;">
+        <button type="submit">Sačuvaj</button>
+        <button mat-button mat-dialog-close>Otkaži</button>
+    </div>
+</form>

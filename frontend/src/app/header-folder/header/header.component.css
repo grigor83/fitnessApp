@@ -1,0 +1,55 @@
+header {
+    display:flex;
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    height: 60px;
+    background-color: lightslategray;
+    position: fixed;
+    left: 0px; right: 0px;
+    z-index: 1000;
+}
+
+h1 {
+    display: inline-block;
+    font-style: bold;
+    font-size: xx-large;
+    margin: 0px;
+}
+
+button {
+    width: 100px;
+    margin: 10px;
+    padding: 5px;
+    background-color: lightgreen;
+    line-height: 25px;
+ }
+
+ .button-container {
+    display: flex;
+    align-items: center; /* Horizontally center align items */
+    justify-content: space-between; /* Align items to the start and end of the flex container */
+    background-color: lightslategray;
+    min-height: 20px;
+    max-height: 25px;
+    max-width: 100%; /* Ensure the container does not exceed the width of its parent */
+}
+
+ @media (max-width: 768px) {
+    .button-container {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      align-items: center; /* Center items vertically */
+      justify-content: center; /* Start at the top of the header */
+      gap: 2px; 
+    }
+
+    button {
+        margin: 0px !important;
+    }
+
+    h1 {
+        margin : 10px;
+    }
+}

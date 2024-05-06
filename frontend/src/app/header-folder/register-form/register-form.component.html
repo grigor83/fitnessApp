@@ -1,0 +1,35 @@
+
+<h2 mat-dialog-title>Registracija</h2>
+
+<mat-dialog-content align="center">
+  <form #registerForm="ngForm" ngNativeValidate (ngSubmit)="register(registerForm)" id="registerForm">
+    <label>Ime i prezime*: </label>
+    <input type="text" ngModel name="name" required>
+    <label>Grad*: </label>
+    <input type="text" ngModel name="city" required>
+    <label>Korisničko ime*: </label>
+    <input type="text" ngModel name="username" required>
+    <label>Lozinka*: </label>
+    <input type="password" ngModel name="password" required>
+    <label>Email*: </label>
+    <input type="email" ngModel name="email" required>
+    <label>Broj kartice*: </label>
+    <input type="text" ngModel name="cardnumber" required>
+    <label>Avatar: </label>
+    <mat-select ngModel name="avatar">
+      <mat-option *ngFor="let avatarUrl of avatarUrls" [value]="avatarUrl">
+        <img [src]="avatarUrl" style="max-height: 40px; max-width: 40px;"> {{avatarUrl.split('/')[1]}}
+      </mat-option>
+    </mat-select>
+    <label>Pretplata: </label>
+    <select  ngModel name="pretplata">
+      <option *ngFor="let category of categoriesList" [value]="category.kategorijaId">{{ category.nazivKategorije + '-' + category.atribut.nazivAtributa }}</option>
+      <option [value]="-1">{{selectedValue}}</option>
+    </select>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button type="submit" form="registerForm">Registruj</button>
+  <button mat-button mat-dialog-close>Otkaži</button>
+</mat-dialog-actions>

@@ -1,0 +1,125 @@
+
+h3 {
+    padding: 10px;
+    margin : 0px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: lightgreen;
+    border-bottom: 2px solid black;
+}
+
+.filter-container {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    background-color: lightslategrey !important;
+}
+
+.first {
+    flex-grow: 0;
+    width: 50%;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.second {
+    flex-grow: 0;
+    width: 50%;
+    padding: 5px;
+}
+
+mat-select {
+    font-size: 14px;
+}
+
+mat-option {
+    font-size: 11px;
+}
+
+table {
+    background-color: lightslategray;
+}
+
+th {
+    table-layout: fixed;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px black solid;
+}
+
+td {
+    text-align: center;
+    align-items: center;
+    padding: 10px;
+}
+
+mat-paginator {
+    background-color: lightslategray;
+    height: 35px !important;
+    padding-bottom: 12px;
+    width: 100%;
+}
+
+.red {
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.kolona {
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-grow: 1;
+    border: 1px black solid;
+    min-width: calc(33% - 120px) !important;
+    max-width: calc(33% - 120px) !important;
+    margin-top:100px; margin-bottom: 30px;
+    margin-left: 50px; margin-right: 50px;
+    min-height: 600px;
+    max-height: 600px;
+}
+
+ul {
+    background-color: lightslategray;
+    width: 100%;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    margin: 0px;
+    padding: 10px; 
+    overflow-y: scroll;
+}
+
+.tabela {
+    flex-grow: 0; 
+    overflow-y: scroll; 
+    min-height : calc(100% - 127px) !important; 
+    max-height : calc(100% - 127px) !important;
+}
+
+.lista {
+    min-height : calc(100% - 70px) !important; max-height : calc(100% - 70px) !important;
+}
+
+.background {
+    width: 100%; height: 100%;  
+    background-repeat: no-repeat; 
+    background-size: cover; 
+}
+
+@media (max-width: 768px) {
+    .kolona {
+        min-width: 70% !important;
+        max-width: 70% !important;
+    }
+
+    .background {
+        overflow-y: scroll;
+        margin-bottom: 30px;
+    }
+
+}

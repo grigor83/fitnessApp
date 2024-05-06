@@ -1,0 +1,13 @@
+
+<h2 mat-dialog-title>Postavi komentar</h2>
+
+<mat-dialog-content>
+  <form #komentarForm="ngForm" ngNativeValidate (ngSubmit)="postComment(komentarForm)" id="komentarForm">
+    <textarea ngModel name="tekst" required>  </textarea>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button type="submit" form="komentarForm">Pošalji</button>
+  <button mat-button mat-dialog-close>Otkaži</button>
+</mat-dialog-actions>
