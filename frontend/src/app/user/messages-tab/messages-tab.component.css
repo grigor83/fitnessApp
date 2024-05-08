@@ -1,0 +1,85 @@
+form {
+    width: 420px; 
+    margin: 30px; 
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: lightslategray;
+}
+
+input {
+    width : 160px;
+}
+
+select {
+    width: 170px;
+    height: 23px;
+}
+
+label, button {
+    display: inline-block;
+    width : 140px;
+    border: 2px solid #ccc;
+    margin : 5px;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: lightslategray;
+}
+
+button[type="submit"] {
+    background-color: lightgreen;
+}
+
+.reset {
+    background-color: lightgreen;
+}
+
+ul {
+    list-style: none;
+    height: 100px;
+    width: 200px;
+    overflow-y: auto;
+    border: solid 1px black;
+    display: inline-block;
+    margin:0px;
+    padding: 0px; 
+    background-color: lightgreen;
+}
+
+li {
+    margin: 5px;
+    padding: 5px;
+    border: solid 1px black;
+    border-radius: 10px;
+    background-color: lightslategray;
+}
+
+li.selected {
+    background-color: whitesmoke; 
+}
+
+textarea {
+    width: 350px;
+    height: 200px;
+    resize: none;
+    
+}
+
+.row-container {
+    display : flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: flex-start;
+}
+
+.col-container {
+    display : flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+}

@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { Participation } from '../models/participation';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Message } from '../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +76,14 @@ export class UserService {
 
   getAllParticipations(): Observable<Participation[]>{
     return this.httpClient.get<Participation[]>('http://localhost:8080/ucestvuje');
+  }
+
+  sendMessage(message : Message){
+    return this.httpClient.post<User>('http://localhost:8080/poruka',message);
+  }
+
+  getUsersMessages(user : User|null){
+    return this.httpClient.get<Message[]>(`http://localhost:8080/poruka/user/${user?.korisnikId}`)
   }
 
 }

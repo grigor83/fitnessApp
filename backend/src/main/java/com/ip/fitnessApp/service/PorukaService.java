@@ -29,6 +29,10 @@ public class PorukaService {
                 .orElse(null);
     }
 
+    public List<Poruka> findByPrimalacId(Integer primalacId){
+        return porukaRepository.findByPrimalacKorisnikId(primalacId);
+    }
+
     public Poruka createPoruka(Poruka poruka) {
         return porukaRepository.save(poruka);
     }
@@ -39,22 +43,7 @@ public class PorukaService {
         if (poruka == null)
             return null;
 
-        if (newPoruka.getDatum() != null)
-            poruka.setDatum(newPoruka.getDatum());
-        if (newPoruka.getTekst() != null)
-            poruka.setTekst(newPoruka.getTekst());
-        poruka.setProcitana(newPoruka.isProcitana());
-        if (newPoruka.getPosiljalac() != null){
-            Optional<Korisnik> k = korisnikRepository.findById(newPoruka.getPosiljalac()
-                    .getKorisnikId());
-            k.ifPresent(poruka::setPosiljalac);
-        }
-        if (newPoruka.getPrimalac() != null){
-            Optional<Korisnik> k = korisnikRepository.findById(newPoruka.getPrimalac()
-                    .getKorisnikId());
-            k.ifPresent(poruka::setPrimalac);
-        }
-
+        poruka = newPoruka;
         return porukaRepository.save(poruka);
     }
 

@@ -1,5 +1,5 @@
-
-<form #updateUserForm="ngForm" ngNativeValidate (ngSubmit)="onUpdateUser(updateUserForm)" style="width: 420px; margin: 30px; text-align: center;">
+<div class="col-container">
+  <form #updateUserForm="ngForm" ngNativeValidate (ngSubmit)="onUpdateUser(updateUserForm)">
     <h2 mat-dialog-title>Unesi nove podatke</h2>
 
     <label>Ime i prezime: </label>
@@ -27,4 +27,5 @@
     <div style="margin-top: 25px;">
         <button type="submit">Promijeni</button>
     </div>
-</form>
+  </form>
+</div>

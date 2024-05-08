@@ -32,3 +32,23 @@ button[type="submit"] {
 .reset {
     background-color: lightgreen;
 }
+
+form {
+    width: 420px; 
+    margin: 25px; 
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: lightslategray;
+}
+
+.col-container {
+    display : flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+}

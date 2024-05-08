@@ -18,9 +18,9 @@ public class Komentar {
     @Id
     @Column(name = "komentar_id")
     private int komentarId;
+    @Basic
     @Column(name = "datum")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd.MM.yyyy. HH:mm")
-    @Basic
     private LocalDateTime datum;
     @Basic
     @Column(name = "tekst")

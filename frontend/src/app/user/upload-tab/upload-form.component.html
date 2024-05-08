@@ -1,4 +1,6 @@
-<form #myForm="ngForm" ngNativeValidate (ngSubmit)="uploadProgram($event, myForm)" style="width: 420px; margin: 30px; text-align: center;">
+
+<div class="col-container">
+  <form #myForm="ngForm" ngNativeValidate (ngSubmit)="uploadProgram($event, myForm)">
     <h2 mat-dialog-title>Novi program</h2>
 
     <label>Naziv programa*: </label>
@@ -29,8 +31,10 @@
       <div *ngIf="!isImageSelected" style="color: red;">Izaberite jednu sliku.</div>
     </div>
 
-    <div style="margin-top: 25px;">
+    <div style="margin-top: 15px;">
         <button type="submit">Kreiraj</button>
         <button class="reset" type="button" (click)="resetForm(myForm)">Otkaži</button>
     </div>
 </form>
+
+</div>

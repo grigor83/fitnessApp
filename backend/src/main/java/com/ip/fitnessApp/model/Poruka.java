@@ -1,15 +1,18 @@
 package com.ip.fitnessApp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = false)
+//lombok zna da napravi problem kad generise equals i tostring metode, ako imamo bidirekcionalnu vezu
+//Zato ovdje navodim exclude
+@EqualsAndHashCode(callSuper = false, exclude = { "primalac", "posiljalac"})
+@ToString(exclude = { "primalac", "posiljalac"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -20,22 +23,19 @@ public class Poruka {
     private int porukaId;
     @Basic
     @Column(name = "datum_slanja")
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "hh:mm dd.MM.yyyy.")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="hh:mm dd.MM.yyyy.")
-    private Timestamp datum;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd.MM.yyyy. HH:mm")
+    private LocalDateTime datum;
     @Column(name = "tekst")
     private String tekst;
-    @Basic
-    @Column(name = "procitana")
-    private boolean procitana;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "posiljalac_id")
+    //@JsonBackReference(value="posiljalac")
     private Korisnik posiljalac;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "primalac_id")
+    //@JsonBackReference(value="primalac")
     private Korisnik primalac;
 
 }

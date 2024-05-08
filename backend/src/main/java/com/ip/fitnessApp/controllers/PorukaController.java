@@ -1,5 +1,6 @@
 package com.ip.fitnessApp.controllers;
 
+import com.ip.fitnessApp.model.Korisnik;
 import com.ip.fitnessApp.model.Poruka;
 import com.ip.fitnessApp.service.PorukaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/poruka")
 public class PorukaController {
     private final PorukaService porukaService;
@@ -31,6 +33,12 @@ public class PorukaController {
             return new ResponseEntity<>(poruka, HttpStatus.OK);
         else
             return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/user/{primalacId}")
+    public ResponseEntity<List<Poruka>> findByPrimalacId(@PathVariable Integer primalacId) {
+        List<Poruka> primljenePoruke = porukaService.findByPrimalacId(primalacId);
+        return new ResponseEntity<>(primljenePoruke, HttpStatus.OK);
     }
 
     @PostMapping

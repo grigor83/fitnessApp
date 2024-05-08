@@ -1,4 +1,5 @@
 import { Kategorija } from "./kategorija";
+import { Message } from "./message";
 
 export class User {
 
@@ -11,7 +12,9 @@ export class User {
     avatar: string|null;
     brojKartice : string;
     verifikovan : boolean;
+    savjetnik : boolean;
     pretplata : Kategorija|null;
+    primljenePoruke: Message[];
 
     constructor(ime : string, grad : string, korisnickoIme:string, lozinka:string, mejl : string, 
                 brojKartice : string, avatar : string|null) {
@@ -22,7 +25,9 @@ export class User {
         this.mejl = mejl;
         this.brojKartice = brojKartice;
         this.verifikovan = false;
+        this.savjetnik = false;
         this.avatar = avatar;
         this.pretplata = null;
+        this.primljenePoruke = [];
     }
 }

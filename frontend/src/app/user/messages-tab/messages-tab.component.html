@@ -1,0 +1,57 @@
+<div class="col-container">
+    <div class="row-container">
+        <div class="col-container">
+            <form #messagesForm="ngForm" ngNativeValidate (ngSubmit)="sendMessage($event, messagesForm)">
+                <h2 mat-dialog-title>Nova poruka</h2>
+            
+                <label>Pošalji poruku*: </label>
+                <select [(ngModel)]="selectedOption" (change)="onSelectChange($event)" name="primalac" required>
+                  <option *ngFor="let receiver of receiversList" [value]="receiver">{{ receiver }}</option>
+                </select>
+            
+                <div *ngIf="selectedOption === 'korisniku'">
+                    <ul>
+                        <li *ngFor="let user of usersList"  
+                            (click)="onListItemClick(user)"
+                            [class.selected]="selectedReceiver === user">
+                            {{ user.korisnickoIme }}
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="selectedOption === 'savjetniku'">
+                    <ul>
+                        <li *ngFor="let counselor of counselorList"  
+                            (click)="onListItemClick(counselor)"
+                            [class.selected]="selectedReceiver === counselor">
+                            {{ counselor.korisnickoIme }}
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="selectedOption === ''">
+                    <ul>   </ul>
+                </div>
+                <textarea [(ngModel)]="message" name="message" placeholder="Nova poruka..." required></textarea>
+            
+                <div style="margin-top: 15px;">
+                    <button type="submit" [disabled]="selectedReceiver==null">Pošalji</button>
+                    <button class="reset" type="button" (click)="resetForm(messagesForm)">Otkaži</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-container">
+            <form>
+                <h2>Primljene poruke</h2>
+            
+                <ul style="width: 350px; height: 400px; margin-top: 10px;">
+                    <li *ngFor="let message of receivedMessages"  
+                        (click)="onMessageClick(message)">
+                        {{ 'Posiljalac: ' +  message.posiljalac?.korisnickoIme + ' >> Datum slanja: ' + message.datum }}
+                    </li>
+                    <li *ngIf="receivedMessages?.length==0">Nemate primljenih poruka!</li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
