@@ -1,0 +1,7 @@
+Za slanje mejlova, koristi se java.mail.api, a taj jar se mora snimiti i dodati u build path projekta
+(na classpath). JAR se snima u folderu WebContent/lib. Međutim, to ne radi u Eclipsu.
+Drugi način je da se projekat konvertuje u maven projekat (desni klik na folder projekta -> Configure -> 
+Convert to maven project). Nakon toga, desni klik -> Maven update.
+Nadalje se svi potrebni jar-ovi dodaju u dependancies u pom.xml fajlu. 
+
+Ovo vrijedi i za com.mysql.cj.jdbc.Driver za konekciju sa bazom podataka, kao i json, itd. 
