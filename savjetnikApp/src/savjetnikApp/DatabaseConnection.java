@@ -9,7 +9,7 @@ public class DatabaseConnection {
     private static final String USER = "root";
     private static final String PASSWORD = "mojabaza";
     private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";  // MySQL JDBC driver
-
+    
 	public DatabaseConnection() { }
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {

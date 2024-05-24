@@ -30,6 +30,11 @@
 		<meta charset="ISO-8859-1">
 		<title>Send email</title>
 		<link rel="stylesheet" href="style.css">
+		<script>
+			function redirectToSavjetnik() {
+				window.location.href = "savjetnik.jsp";
+			}
+		</script>
 	</head>
 
 	<body>
@@ -57,7 +62,11 @@
 					<label>Prikaci fajl <input type="file" name="fajl" accept="image/*, .txt, .pdf" hidden="true"></label>
 				</div>
 				
-    			<input type="submit" name="send" value="Posalji mejl">
+				<div>
+				    <input type="submit" name="send" value="Posalji mejl">
+				    <button type="button" onclick="redirectToSavjetnik()">Odustani</button>
+				</div>
+				
 		</form>
 	</body>
 </html>

@@ -12,18 +12,18 @@
 
     
     <%
-    if (request.getParameter("submit") != null){
-    	if (SavjetnikService.isUsernameDuplicate(newSavjetnik.getUserName())){
-    		session.setAttribute("notifikacija", "Korisnicko ime je vec zauzeto!");
-    	}
-    	else if (SavjetnikService.createSavjetnik(newSavjetnik)){
-    		SavjetnikService.loadUsers();
-    		session.setAttribute("notifikacija", "Nalog je kreiran! Sacekajte na odobrenje administratora!");
-    	}
-    }
-    else
-    	session.setAttribute("notifikacija", "");
-     %>
+        if (request.getParameter("submit") != null){
+            	if (SavjetnikService.isUsernameDuplicate(newSavjetnik.getUserName())){
+            		session.setAttribute("notifikacija", "Korisnicko ime je vec zauzeto!");
+            	}
+            	else if (SavjetnikService.insertSavjetnik(newSavjetnik)){
+            		SavjetnikService.loadUsers();
+            		session.setAttribute("notifikacija", "Nalog je kreiran! Sacekajte na odobrenje administratora!");
+            	}
+            }
+            else
+            	session.setAttribute("notifikacija", "");
+        %>
     
     
 <!DOCTYPE html>

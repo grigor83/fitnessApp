@@ -22,6 +22,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class SavjetnikService {
 	
 	private static List<SavjetnikBean> savjetnici;
+	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
 
 	public SavjetnikService() { }
 	
@@ -33,7 +34,40 @@ public class SavjetnikService {
 		SavjetnikService.savjetnici = savjetnici;
 	}
 	
-	public static boolean createSavjetnik(SavjetnikBean newSavjetnik) throws IOException, SQLException, ClassNotFoundException {		
+	public static boolean insertSavjetnik(SavjetnikBean newSavjetnik) throws IOException, SQLException, ClassNotFoundException {	
+		boolean result = false;
+		Connection connection = null;
+
+		try {
+			connection = connectionPool.checkOut();
+			String insertSQL = "INSERT INTO korisnik (ime, korisnicko_ime, lozinka, mejl, grad, broj_kartice, verifikovan, savjetnik) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement preparedStatement = connection.prepareStatement(insertSQL);
+	        preparedStatement.setString(1, newSavjetnik.getName());
+	        preparedStatement.setString(2, newSavjetnik.getUserName());
+	        preparedStatement.setString(3, newSavjetnik.getPassword());
+	        preparedStatement.setString(4, newSavjetnik.getEmail());
+	        preparedStatement.setString(5, "Banjaluka");
+	        preparedStatement.setString(6, "000");
+	        preparedStatement.setBoolean(7, false);
+	        preparedStatement.setBoolean(8, true);
+	        
+	        int rowsInserted = preparedStatement.executeUpdate();
+	        if (rowsInserted > 0) {
+	            System.out.println("A new user was inserted successfully!");
+	            result = true;
+	        }
+	        else 
+	        	result = false;
+            preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+		
+		return result;		
+		
+		/*
 		Connection connection = DatabaseConnection.getConnection();
         System.out.println("Database connection successful!");
         String insertSQL = "INSERT INTO korisnik (ime, korisnicko_ime, lozinka, mejl, grad, broj_kartice, verifikovan, savjetnik) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -56,7 +90,10 @@ public class SavjetnikService {
         }
         else 
         	return false;
-		/*
+		*/
+		
+		//////////////////////////////////////////////////////////////////////////////////
+		 /*
 		 * Ovaj kod je za slanje http zahtjeva za kreiranje korisnika springboot serveru.
 		 * JSONObject jsonObject = new JSONObject();
         jsonObject.put("ime", newSavjetnik.getName());
@@ -91,6 +128,32 @@ public class SavjetnikService {
 	public static void loadUsers() throws IOException, ClassNotFoundException, SQLException {
 		savjetnici = new ArrayList<>();
 
+		Connection connection = null;
+		try {
+			connection = connectionPool.checkOut();
+			String selectSQL = "SELECT korisnik_id, ime, korisnicko_ime, lozinka, mejl, verifikovan, savjetnik FROM korisnik";
+	        PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);	        
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        while (resultSet.next()) {
+	            int id = resultSet.getInt("korisnik_id");
+	            String ime = resultSet.getString("ime");
+	            String korisnickoIme = resultSet.getString("korisnicko_ime");
+	            String lozinka = resultSet.getString("lozinka");
+	            String email = resultSet.getString("mejl");
+	            boolean verifikovan = resultSet.getBoolean("verifikovan");
+	            boolean savjetnik = resultSet.getBoolean("savjetnik");
+	            
+	            if (savjetnik)
+	            	savjetnici.add(new SavjetnikBean(id, ime, korisnickoIme, lozinka, email, verifikovan));
+	        }
+            preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+		
+		/*
 		Connection connection = DatabaseConnection.getConnection();
         System.out.println("Database connection successful!");
         String selectSQL = "SELECT korisnik_id, ime, korisnicko_ime, lozinka, mejl, verifikovan, savjetnik FROM korisnik";
@@ -110,7 +173,8 @@ public class SavjetnikService {
         }
         
         connection.close();
-		
+		*/
+		////////////////////////////////////////////////////////////
 		/* Ovaj kod je za slanje get zahtjeva springboot serveru.
 		URL url = new URL("http://localhost:8080/korisnik");
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -150,7 +214,41 @@ public class SavjetnikService {
 	
 	public static ArrayList<PorukaBean> getUsersMessages(SavjetnikBean savjetnik) throws IOException, ClassNotFoundException, SQLException{
     	ArrayList<PorukaBean> temp = new ArrayList<>();
+    	
+    	Connection connection = null;
+		try {
+			connection = connectionPool.checkOut();
+			String selectSQL = "SELECT poruka_id, posiljalac_id, datum_slanja, tekst, procitana FROM poruka WHERE primalac_id = ?";
+	        PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+	        preparedStatement.setInt(1, savjetnik.getId());      
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        while (resultSet.next()) {
+	            int poruka_id = resultSet.getInt("poruka_id");
+	            int posiljalac_id = resultSet.getInt("posiljalac_id");
+	            String datum = resultSet.getString("datum_slanja");
+	            String tekst = resultSet.getString("tekst");
+	            boolean procitana = resultSet.getBoolean("procitana");
+	            
+	            String selectPosiljalac = "SELECT korisnik_id, ime, korisnicko_ime, lozinka, mejl, verifikovan FROM korisnik WHERE korisnik_id = ?";
+	            preparedStatement = connection.prepareStatement(selectPosiljalac);
+	            preparedStatement.setInt(1, posiljalac_id);
+	            ResultSet resultSet2 = preparedStatement.executeQuery();
+	            if (resultSet2.next()) {
+	            	SavjetnikBean posiljalac = new SavjetnikBean(resultSet2.getInt("korisnik_id"), resultSet2.getString("ime"), resultSet2.getString("korisnicko_ime"), 
+	        				null, resultSet2.getString("mejl"), resultSet2.getBoolean("verifikovan"));
+	            	temp.add(new PorukaBean(poruka_id, posiljalac, tekst,
+	    					datum, procitana));
+	            }
+	            preparedStatement.close();
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+		return temp;
 
+    	/*
 		Connection connection = DatabaseConnection.getConnection();
         System.out.println("Database connection successful!");
         String selectSQL = "SELECT poruka_id, posiljalac_id, datum_slanja, tekst, procitana FROM poruka WHERE primalac_id = ?";
@@ -179,7 +277,8 @@ public class SavjetnikService {
         
         connection.close();
         return temp;
-        
+        */
+    	//////////////////////////////////////////////////////////////////////////
 		/*
 		URL url = new URL("http://localhost:8080/poruka/user/" + savjetnik.getId());
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -220,7 +319,31 @@ public class SavjetnikService {
 			return false;
 	}
 	
-	public static void updateMessage(SavjetnikBean savjetnik, PorukaBean message) throws IOException, ClassNotFoundException, SQLException {		
+	public static void updateMessage(SavjetnikBean savjetnik, PorukaBean message) throws IOException, ClassNotFoundException, SQLException {	
+		Connection connection = null;
+		try {
+			connection = connectionPool.checkOut();
+			String updateSQL = "UPDATE poruka SET procitana = ? WHERE poruka_id = ?";        
+	        PreparedStatement preparedStatement = connection.prepareStatement(updateSQL);
+	        preparedStatement.setBoolean(1, true);
+	        preparedStatement.setInt(2, message.getId());
+
+	        int rowsUpdated = preparedStatement.executeUpdate();
+	        if (rowsUpdated > 0) {
+	        	PorukaBean p = savjetnik.getPrimljenePoruke().stream()
+	      				 .filter(poruka -> poruka.getId() == message.getId())
+	      				 .findAny().orElse(null);
+	           	if (p != null)
+	             		p.setProcitana(true);
+	        } 
+	        preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+		
+		/*
 		Connection connection = DatabaseConnection.getConnection();
         System.out.println("Database connection successful!");
         String updateSQL = "UPDATE poruka SET procitana = ? WHERE poruka_id = ?";        
@@ -236,6 +359,8 @@ public class SavjetnikService {
            	if (p != null)
              		p.setProcitana(true);
         } 
+        */
+		///////////////////////////////////////////////////////////
 		/*
 		URL url = new URL("http://localhost:8080/poruka/setProcitana/" + message.getId());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

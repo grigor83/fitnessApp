@@ -11,28 +11,29 @@
     
     <%
         Object pokrenuta = application.getAttribute("prvoPokretanje");
-                                if (pokrenuta == null){
-                                   SavjetnikService.loadUsers();
-                                   application.setAttribute("prvoPokretanje", "true");
-                                }
-                                    
-                                if (request.getParameter("submit") != null){
-                                   SavjetnikBean s = SavjetnikService.login(savjetnik.getUserName(), savjetnik.getPassword());
-                                   if (s != null){
-                                	    savjetnik.setName(s.getName());
-                                	    savjetnik.setEmail(s.getEmail());
-                                	    savjetnik.setPrimljenePoruke(s.getPrimljenePoruke());
-                                    	savjetnik.setLoggedIn(true);
-                                    	session.setAttribute("notifikacija", "");
-                                    	response.sendRedirect("savjetnik.jsp");
-                                   }
-                                   else {
-                                    	session.setAttribute("notifikacija", "Unijeli ste neispravno korisnicko ime i lozinku!");
-                                   }
-                                }
-                                else 
-                                	session.setAttribute("notifikacija", "");
-        %>
+    	
+    	if (pokrenuta == null){
+        	SavjetnikService.loadUsers();
+        	application.setAttribute("prvoPokretanje", "true");
+     	}
+    	
+    	if (request.getParameter("submit") != null){
+            SavjetnikBean s = SavjetnikService.login(savjetnik.getUserName(), savjetnik.getPassword());
+            if (s != null){
+         	    savjetnik.setName(s.getName());
+         	    savjetnik.setEmail(s.getEmail());
+         	    savjetnik.setPrimljenePoruke(s.getPrimljenePoruke());
+             	savjetnik.setLoggedIn(true);
+             	session.setAttribute("notifikacija", "");
+             	response.sendRedirect("savjetnik.jsp");
+            }
+            else {
+             	session.setAttribute("notifikacija", "Unijeli ste neispravno korisnicko ime i lozinku!");
+            }
+         }
+         else 
+         	session.setAttribute("notifikacija", "");
+    %>
     
     
 <!DOCTYPE html>
