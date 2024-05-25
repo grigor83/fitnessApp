@@ -60,15 +60,15 @@
 				style="margin-bottom: 5px; width:200px;">
 		
 		<table id="dataTable" style="border-collapse:collapse;  text-align: center; min-width: 60%" border="1">
-		<thead> 
-			<tr>
-				<th>Posiljalac</th>
-				<th>Vrijeme slanja</th>
-				<th>Tekst poruke</th>
-				<th>Procitana</th>
-			</tr>
-		</thead>
-		<tbody>
+			<thead> 
+				<tr>
+					<th>Posiljalac</th>
+					<th>Vrijeme slanja</th>
+					<th>Tekst poruke</th>
+					<th>Procitana</th>
+				</tr>
+			</thead>
+			<tbody>
 			<%
 				for (PorukaBean message : savjetnik.getPrimljenePoruke()) {
 			%> 
@@ -81,8 +81,8 @@
 				<td><%= message.isProcitana() %></td>
 			</tr>
 			<% } %>
-		</tbody>
-	</table>
+			</tbody>
+		</table>
 	
 	<% if (session.getAttribute("alert") != null && session.getAttribute("alert").equals("true")) { %>
     		<script type="text/javascript">

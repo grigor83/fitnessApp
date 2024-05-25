@@ -202,9 +202,11 @@ public class SavjetnikService {
 		 */
 	}
 	
-	public static SavjetnikBean login(String userName, String password) throws IOException, ClassNotFoundException, SQLException {		
+	public static SavjetnikBean login(String userName, String password) throws IOException, ClassNotFoundException, SQLException {	
+		SavjetnikService.loadUsers();
 		SavjetnikBean s = savjetnici.stream()
-						 .filter(savjetnik -> savjetnik.getUserName().equals(userName) && savjetnik.getPassword().equals(password))
+						 .filter(savjetnik -> savjetnik.getUserName().equals(userName) && savjetnik.getPassword().equals(password)
+								 && savjetnik.isVerifikovan())
 						 .findAny().orElse(null);
 		if (s != null)
 			s.setPrimljenePoruke(getUsersMessages(s));

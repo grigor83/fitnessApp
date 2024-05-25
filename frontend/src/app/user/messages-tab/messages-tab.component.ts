@@ -62,6 +62,7 @@ export class MessagesTabComponent {
 
   onSelectChange(event: any) {
     this.selectedOption = event.target.value;
+    this.filterUsers();
   }
 
   onListItemClick(receiver: User) {

@@ -54,7 +54,8 @@ public class KorisnikController {
     public ResponseEntity<Korisnik> registerUser(@RequestBody Korisnik korisnik) {
         if (korisnik.getKorisnikId() == 0){
             Korisnik newKorisnik = korisnikService.createKorisnik(korisnik);
-            emailService.sendVerificationEmail(newKorisnik);
+            if (!newKorisnik.isSavjetnik())
+                emailService.sendVerificationEmail(newKorisnik);
             return new ResponseEntity<>(newKorisnik, HttpStatus.CREATED);
         }
         else {

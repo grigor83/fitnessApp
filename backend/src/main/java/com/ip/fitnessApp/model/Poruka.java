@@ -27,6 +27,9 @@ public class Poruka {
     private LocalDateTime datum;
     @Column(name = "tekst")
     private String tekst;
+    @Basic
+    @Column(name = "procitana")
+    private boolean procitana;
 
     @ManyToOne()
     @JoinColumn(name = "posiljalac_id")
