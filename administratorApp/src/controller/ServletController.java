@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import beans.AdministratorBean;
 import beans.AttributesBeans;
 import beans.CategoriesBean;
+import beans.LogBean;
 import beans.UsersBean;
 import dao.AdminDAO;
 import dao.CategoryDAO;
+import dao.LogDAO;
 import dao.UserDAO;
 import dto.Administrator;
 import dto.Category;
@@ -62,6 +64,8 @@ public class ServletController extends HttpServlet {
 					UsersBean usersBean = new UsersBean();
 					usersBean.setUsers(UserDAO.loadUsers());
 					session.setAttribute("usersBean", usersBean);
+					LogBean logBean = new LogBean();
+					session.setAttribute("logBean", logBean);
 				} else {
 					session.setAttribute("notification", "Pogresni parametri za pristup");
 				}
@@ -193,14 +197,28 @@ public class ServletController extends HttpServlet {
 				if (usersBean.isUsernameDuplicate(username))
 					session.setAttribute("notification", "Korisnicko ime je vec zauzeto!");					
 				else if (UserDAO.insertUser(ime, grad, email, username, password, Boolean.parseBoolean(savjetnik), Boolean.parseBoolean(verifikovan), brojKartice)) {
-					//UsersBean usersBean = (UsersBean) session.getAttribute("usersBean");
 					usersBean.setUsers(UserDAO.loadUsers());
 					session.setAttribute("notification", "Kreirali ste novog korisnika!");
 				}
 			} 
 			address = "/WEB-INF/pages/newuser.jsp";
 			
-		} else
+		} else if (action.equals("statistics")) {
+			LogBean logBean = (LogBean) session.getAttribute("logBean");
+			if (request.getParameter("brojlogova") != null)
+				logBean.resetLogs();
+			else
+				logBean.loadLogs();
+			session.setAttribute("defaultTab", "statistika");
+			address = "/WEB-INF/pages/administrator.jsp";
+		} else if (action.equals("users")) {
+			UsersBean usersBean = (UsersBean) session.getAttribute("usersBean");
+			usersBean.setUsers(UserDAO.loadUsers());
+			session.setAttribute("defaultTab", "korisnici");
+			address = "/WEB-INF/pages/administrator.jsp";
+		}
+		
+		else
 			address = "/WEB-INF/pages/404.jsp";
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);

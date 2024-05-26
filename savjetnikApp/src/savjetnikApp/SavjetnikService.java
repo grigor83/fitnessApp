@@ -214,6 +214,31 @@ public class SavjetnikService {
 		return s;
 	}
 	
+	public static void updateLogs() {
+		Connection connection = null;
+		String selectSQL = "SELECT * FROM log WHERE log_id = ?";        
+		String updateSQL = "UPDATE log SET broj_logova = ? WHERE log_id = ?"; 
+		try {
+			connection = connectionPool.checkOut();       
+	        PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
+	        preparedStatement.setInt(1, 1);
+	        ResultSet rs = preparedStatement.executeQuery();
+	        if (rs.next()) {
+	        	int logs = rs.getInt("broj_logova");
+	        	preparedStatement = connection.prepareStatement(updateSQL);
+	        	preparedStatement.setInt(1,logs+1);
+		        preparedStatement.setInt(2,1);
+		        preparedStatement.executeUpdate();
+	        }
+	        
+	        preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+	}
+	
 	public static ArrayList<PorukaBean> getUsersMessages(SavjetnikBean savjetnik) throws IOException, ClassNotFoundException, SQLException{
     	ArrayList<PorukaBean> temp = new ArrayList<>();
     	
@@ -312,8 +337,32 @@ public class SavjetnikService {
 	}
 	
 	public static boolean isUsernameDuplicate(String username) {
-		SavjetnikBean s = savjetnici.stream()
-				 .filter(savjetnik -> savjetnik.getUserName().equals(username))
+		ArrayList<SavjetnikBean> korisnici = new ArrayList<>();
+
+		Connection connection = null;
+		try {
+			connection = connectionPool.checkOut();
+			String selectSQL = "SELECT korisnik_id, ime, korisnicko_ime, lozinka, mejl, verifikovan, savjetnik FROM korisnik";
+	        PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);	        
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        while (resultSet.next()) {
+	            int id = resultSet.getInt("korisnik_id");
+	            String ime = resultSet.getString("ime");
+	            String korisnickoIme = resultSet.getString("korisnicko_ime");
+	            String lozinka = resultSet.getString("lozinka");
+	            String email = resultSet.getString("mejl");
+	            boolean verifikovan = resultSet.getBoolean("verifikovan");	            
+	            korisnici.add(new SavjetnikBean(id, ime, korisnickoIme, lozinka, email, verifikovan));
+	        }
+            preparedStatement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+		
+		SavjetnikBean s = korisnici.stream()
+				 .filter(user -> user.getUserName().equals(username))
 				 .findAny().orElse(null);
 		if (s != null)
 			return true;

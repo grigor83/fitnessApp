@@ -43,6 +43,9 @@ export class UserService {
           result = true;
           this.activeUser = user;
           userExists = true;
+          this.updateLogs().subscribe(response => {
+            console.log(response);
+          });
           alert("Zdravo, " + this.activeUser.korisnickoIme + "! Uspješno ste se ulogovali!");
           break;
         }
@@ -63,6 +66,11 @@ export class UserService {
       alert("Neispravno korisničko ime ili lozinka!");
     this.signedIn = result;
     return result;
+  }
+
+  private updateLogs() {
+    const logUrl = 'http://localhost:8080/logs';
+    return this.httpClient.put<any>(`${logUrl}/${1}`, 1);
   }
 
   public logout(){

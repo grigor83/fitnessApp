@@ -5,7 +5,9 @@
 <jsp:useBean id="categoriesBean" class="beans.CategoriesBean" scope="session"></jsp:useBean>
 <%@page import="dto.User"%>
 <jsp:useBean id="usersBean" class="beans.UsersBean" scope="session"></jsp:useBean>
-    
+<jsp:useBean id="logBean" class="beans.LogBean" scope="session"></jsp:useBean>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,11 @@
 		  // Show the current tab, and add an "active" class to the button that opened the tab
 		  document.getElementById(tabcontentName).style.display = "block";
 		  event.currentTarget.className += " active";
+		  
+		  if (tabcontentName === 'statistics')
+			  document.getElementById('reloadLogs').click();
+		  else if (tabcontentName === 'users')
+				  document.getElementById('reloadUsers').click();
 		}
 	</script>
 </head>
@@ -40,7 +47,7 @@
 		<div class="tab">
 			<button id="kategorije" class="tablinks" onclick="openTabContent(event, 'categories')">Kategorije</button>
   			<button id="korisnici" class="tablinks" onclick="openTabContent(event, 'users')">Korisnici</button>
-  			<button id="statistika" class="tablinks" onclick="openTabContent(event, 'Tokyo')">Statistika</button>
+  			<button id="statistika" class="tablinks" onclick="openTabContent(event, 'statistics')">Statistika</button>
 		</div>
 		
 		<!-- Tab content -->
@@ -108,15 +115,27 @@
     		</label>
 		</div>
 
-		<div id="Tokyo" class="tabcontent">
-  			<h3>Tokyo</h3>
-  			<p>Tokyo is the capital of Japan.</p>
+		<div id="statistics" class="tabcontent">
+			<form method="post" action="?action=statistics">
+				<div>
+					<label>Broj logova: </label>
+    				<input type="text" name="brojlogova" autofocus="autofocus" required
+    				value="<%= logBean.getBrojLogova() %>" >
+				</div>
+				
+				<input type="submit" value="Resetuj">
+		</form>
 		</div>
 		
 		<script>
 		// Get the element with id="defaultOpen" and click on it
 			document.getElementById("<%=session.getAttribute("defaultTab") %>").click();
 		</script>
+		
+		<div class="hidden-elements" hidden="true">
+			<a id="reloadLogs" href="?action=statistics"></a>
+			<a id="reloadUsers" href="?action=users"></a>
+		</div>
 
 </body>
 </html>

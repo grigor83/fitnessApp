@@ -42,6 +42,10 @@ input[type="submit"] {
 	margin-top: 15px;
 }
 
+input[type="text"] {
+	padding-left: 2px;
+}
+
 select {
     width: 143px;
     height: 23px;
