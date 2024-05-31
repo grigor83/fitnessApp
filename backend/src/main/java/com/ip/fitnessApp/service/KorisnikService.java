@@ -1,5 +1,7 @@
 package com.ip.fitnessApp.service;
 
+import com.ip.fitnessApp.exceptions.RecordNotFoundException;
+import com.ip.fitnessApp.exceptions.UsernameAlreadyExistsException;
 import com.ip.fitnessApp.model.Korisnik;
 import com.ip.fitnessApp.repository.KorisnikRepository;
 import jakarta.transaction.Transactional;
@@ -25,12 +27,18 @@ public class KorisnikService {
 
     public Korisnik findById(Integer id){
         return korisnikRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(
+                        () -> new RecordNotFoundException("Ne postoji korisnik čiji je id = " + id + "!")
+                );
     }
 
     public Korisnik createKorisnik(Korisnik korisnik) {
-        Korisnik newKorisnik = korisnikRepository.save(korisnik);
-        return korisnikRepository.save(korisnik);
+        if (korisnikRepository.existsByKorisnickoIme(korisnik.getKorisnickoIme()))
+            throw new UsernameAlreadyExistsException("Korisničko ime " + korisnik.getKorisnickoIme() + " je vec zauzeto!");
+        else {
+            Korisnik newKorisnik = korisnikRepository.save(korisnik);
+            return korisnikRepository.save(korisnik);
+        }
     }
 
     public Korisnik updateKorisnik(Korisnik newKorisnik, Integer id) {

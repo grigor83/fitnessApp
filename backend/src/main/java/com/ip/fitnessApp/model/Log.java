@@ -18,7 +18,14 @@ public class Log {
     @Column(name = "log_id")
     private int logId;
     @Basic
-    @Column(name = "broj_logova")
-    private int brojLogova;
+    @Column(name = "poruka")
+    private String poruka;
+    @Basic
+    @Column(name = "datum")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd.MM.yyyy. HH:mm")
+    private LocalDateTime datum;
+    @Basic
+    @Column(name = "logger")
+    private String logger;
 
 }

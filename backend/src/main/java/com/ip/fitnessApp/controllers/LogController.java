@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/logs")
@@ -16,13 +18,9 @@ public class LogController {
         this.logService = logService;
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Log> updateLog(@PathVariable Integer id) {
-        Log updatedLog = logService.updateLog(id);
-
-        if (updatedLog != null)
-            return new ResponseEntity<>(updatedLog, HttpStatus.OK);
-        else
-            return ResponseEntity.notFound().build();
+    @GetMapping
+    public ResponseEntity<List<Log>> findAll() {
+        List<Log> logs = logService.findAll();
+        return new ResponseEntity<>(logs, HttpStatus.OK);
     }
 }

@@ -64,8 +64,8 @@ public class ServletController extends HttpServlet {
 					UsersBean usersBean = new UsersBean();
 					usersBean.setUsers(UserDAO.loadUsers());
 					session.setAttribute("usersBean", usersBean);
-					LogBean logBean = new LogBean();
-					session.setAttribute("logBean", logBean);
+					LogBean logsBean = new LogBean();
+					session.setAttribute("logBean", logsBean);
 				} else {
 					session.setAttribute("notification", "Pogresni parametri za pristup");
 				}
@@ -204,11 +204,8 @@ public class ServletController extends HttpServlet {
 			address = "/WEB-INF/pages/newuser.jsp";
 			
 		} else if (action.equals("statistics")) {
-			LogBean logBean = (LogBean) session.getAttribute("logBean");
-			if (request.getParameter("brojlogova") != null)
-				logBean.resetLogs();
-			else
-				logBean.loadLogs();
+			LogBean logsBean = (LogBean) session.getAttribute("logsBean");
+			logsBean.loadLogs();
 			session.setAttribute("defaultTab", "statistika");
 			address = "/WEB-INF/pages/administrator.jsp";
 		} else if (action.equals("users")) {

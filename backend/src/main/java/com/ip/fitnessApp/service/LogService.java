@@ -5,6 +5,9 @@ import com.ip.fitnessApp.repository.LogRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @Transactional
 public class LogService {
@@ -15,13 +18,16 @@ public class LogService {
         this.logRepository = logRepository;
     }
 
-    public Log updateLog(Integer id) {
-        Log log = logRepository.findById(id)
-                .orElse(null);
-        if (log == null)
-            return null;
+    public List<Log> findAll(){
+        return logRepository.findAll();
+    }
 
-        log.setBrojLogova(log.getBrojLogova()+1);
-        return logRepository.save(log);
+    public void saveLog(String poruka, String logger) {
+        Log newLog = new Log();
+        newLog.setPoruka(poruka);
+        newLog.setDatum(LocalDateTime.now());
+        newLog.setLogger(logger);
+
+        logRepository.save(newLog);
     }
 }

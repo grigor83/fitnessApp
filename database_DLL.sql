@@ -127,7 +127,9 @@ DROP TABLE IF EXISTS log;
 CREATE TABLE log 
 (
 	log_id				int	 			not null auto_increment,
-	broj_logova			int				not null,
+	poruka 				varchar(70)    	not null,
+    datum				timestamp		not null,
+    logger 				varchar(70)    	not null,
     PRIMARY KEY(log_id)
 );
 
@@ -148,6 +150,7 @@ insert into komentar(tekst,korisnik_id,program_id, datum) values ('trening je bi
 insert into poruka(posiljalac_id,primalac_id,tekst,datum_slanja,procitana) values (1,2,'Ovo je prva poruka','2024-04-02',0),(2,1,'Ovo je prvi odgovor','2024-04-02',0);
 insert into ucestvuje(korisnik_id,program_id,nacin_placanja,datum) values (2,1,'paypal','2024-02-04');
 insert into administrator(ime, prezime, korisnicko_ime, lozinka) values ('admin','admin','admin','admin');
-insert into log(broj_logova) values (0);
+insert into log(poruka, datum, logger) values ('Ne postoji korisnik čiji je id = 500!','2024-05-31', 'class com.ip.fitnessApp.exceptions.RecordNotFoundException'),
+('Korisničko ime mm je već zauzeto!','2024-05-31', 'class com.ip.fitnessApp.exceptions.UsernameAlreadyExistsException');
 
 

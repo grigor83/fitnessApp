@@ -1,3 +1,4 @@
+<%@page import="beans.LogBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -5,13 +6,13 @@
 <jsp:useBean id="categoriesBean" class="beans.CategoriesBean" scope="session"></jsp:useBean>
 <%@page import="dto.User"%>
 <jsp:useBean id="usersBean" class="beans.UsersBean" scope="session"></jsp:useBean>
-<jsp:useBean id="logBean" class="beans.LogBean" scope="session"></jsp:useBean>
+<jsp:useBean id="logsBean" class="beans.LogBean" scope="session"></jsp:useBean>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Administrator</title>
 	<link rel="stylesheet" href="style.css">
 	<script type="text/javascript">
@@ -116,15 +117,26 @@
 		</div>
 
 		<div id="statistics" class="tabcontent">
-			<form method="post" action="?action=statistics">
-				<div>
-					<label>Broj logova: </label>
-    				<input type="text" name="brojlogova" autofocus="autofocus" required
-    				value="<%= logBean.getBrojLogova() %>" >
-				</div>
-				
-				<input type="submit" value="Resetuj">
-		</form>
+			<table border="1">
+				<thead> 
+					<tr>
+					<th>Poruka</th>
+					<th>Datum</th>
+					<th>Logger</th>
+					</tr>
+				</thead>
+					<tbody>
+				<%
+					for (LogBean log : logsBean.getLogs()) {
+				%> 
+					<tr>
+						<td><%= log.getPoruka() %></td>
+						<td><%= log.getDatum() %></td>
+						<td><%= log.getLogger() %></td>
+					</tr>
+				<% } %>
+					</tbody>
+				</table>
 		</div>
 		
 		<script>
