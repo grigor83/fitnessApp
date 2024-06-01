@@ -135,11 +135,17 @@ CREATE TABLE log
 
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=1 */;
 
-INSERT INTO atribut(naziv_atributa) values ('trčanje'), ('aerobik'), ('benč'), ('mrtvo dizanje');
-INSERT INTO kategorija(naziv_kategorije, atribut_id) VALUES ('kardio',1),('kardio',2),('snaga',3),('snaga',4);
+INSERT INTO atribut(naziv_atributa) values ('trčanje'), ('aerobik'), ('benč'), ('mrtvo dizanje'), 
+('propadanje'), ('zgibovi'),('traka za trčanje');
+INSERT INTO kategorija(naziv_kategorije, atribut_id) VALUES ('kardio',1),('kardio',2),('snaga',3),('snaga',4),
+('snaga',5),('snaga',6), ('kardio',7);
 insert into fitness_program(naziv_programa,opis, naziv_slike, trajanje_treninga,nivo_tezine,cijena,lokacija,kategorija_id,instruktor_ime, instruktor_kontakt)
  values ('trčanje u prirodi','trčanje po brdskim stazama','assets/1.jfif','45 minuta',3,20,'park',1,'Stevica Kurčubić','066/152-471'), 
- ('trening u teretani','dizanje tegova','assets/2.jfif','60 minuta',4,30,'teretana',3,'Petar Čelik','066/777-214');
+ ('vježbe za grudi','dizanje tegova','assets/2.jfif','60 minuta',4,30,'teretana',3,'Petar Čelik','066/777-214'),
+ ('vježbe za donji dio leđa','dizanje tegova','assets/2.jfif','60 minuta',4,30,'teretana',4,'Petar Čelik','066/777-214'),
+ ('vježbe za triceps','razboj','assets/2.jfif','60 minuta',4,30,'teretana',5,'Arnold Švarceneger','066/777-214'),
+ ('vježbe za leđa','vratilo','assets/2.jfif','60 minuta',4,30,'teretana',6,'Arnold Švarceneger','066/777-214'),
+ ('aerobni trening u teretani','trčanje na traci','assets/2.jfif','60 minuta',4,30,'teretana',7,'Arnold Švarceneger','066/777-214');
 insert into korisnik(ime,grad,avatar,mejl,broj_kartice,korisnicko_ime,lozinka,verifikovan,savjetnik) values 
 ('Marko Markovic','Banja Luka','mm_avatar.jpg','mmarkovic@gmail.com','1111','mm','mm',1,1),
 ('Jovan Jovanovic','Banja Luka','jj_avatar.jpg','igorgrubisa@hotmail.com','2222','jj','jj',0,0),
@@ -151,6 +157,6 @@ insert into poruka(posiljalac_id,primalac_id,tekst,datum_slanja,procitana) value
 insert into ucestvuje(korisnik_id,program_id,nacin_placanja,datum) values (2,1,'paypal','2024-02-04');
 insert into administrator(ime, prezime, korisnicko_ime, lozinka) values ('admin','admin','admin','admin');
 insert into log(poruka, datum, logger) values ('Ne postoji korisnik čiji je id = 500!','2024-05-31', 'class com.ip.fitnessApp.exceptions.RecordNotFoundException'),
-('Korisničko ime mm je već zauzeto!','2024-05-31', 'class com.ip.fitnessApp.exceptions.UsernameAlreadyExistsException');
-
+('Korisničko ime mm je već zauzeto!','2024-05-31', 'class com.ip.fitnessApp.exceptions.UsernameAlreadyExistsException'),
+('Ne postoji fitnes program čiji je id = 500!','2024-06-01', 'class com.ip.fitnessApp.exceptions.RecordNotFoundException');
 

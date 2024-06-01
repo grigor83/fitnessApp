@@ -1,21 +1,23 @@
 
 
-<div class="col-container main-container" style="height: 100%;">    
+<div class="col-container main-container" style="height: calc(100% - 50px);  padding-top: 50px;">    
     <div class="row-container" style="background-color: lightslategray; width: 100%;">
         <div class="col-container" style="width: calc (25% - 10px); align-items: flex-start;">
             <div class="row-container"><h3>Naziv programa:</h3><label>{{ fitnesProgram.nazivPrograma }}</label></div>
             <div class="row-container"><h3>Lokacija:</h3><label>{{ fitnesProgram.lokacija }}</label></div>
+            <div class="row-container"><h3>Kategorija:</h3><label>{{ fitnesProgram.kategorija.nazivKategorije }}</label></div>
             <div class="row-container"><h3>Instruktor:</h3><label>{{ fitnesProgram.imeInstruktora }}</label></div>
             <div class="row-container"><h3>Kontakt:</h3><label>{{ fitnesProgram.kontakt }}</label></div>
         </div>
 
-        <div class="col-container" style="width: 50%; height: 400px; margin:10px;">
+        <div class="col-container" style="width: 50%; height: 300px; margin:10px;">
             <img [src]="fitnesProgram.nazivSlike" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
 
         <div class="col-container" style="width: calc (25% - 10px); align-items: flex-start;">
             <div class="row-container"><h3>Opis programa:</h3><textarea >{{ fitnesProgram.opis }}</textarea></div>
             <div class="row-container"><h3>Trajanje treninga:</h3><label>{{ fitnesProgram.trajanje }}</label></div>
+            <div class="row-container"><h3>Atribut:</h3><label>{{ fitnesProgram.kategorija.atribut.nazivAtributa }}</label></div>
             <div class="row-container"><h3>Cijena:</h3><label>{{ fitnesProgram.cijena }} KM</label></div>
             <div class="row-container">
                 <h3>Autor:</h3><label>{{ fitnesProgram.autor?.ime || 'administrator' }}</label>            

@@ -1,5 +1,6 @@
 package com.ip.fitnessApp.service;
 
+import com.ip.fitnessApp.exceptions.RecordNotFoundException;
 import com.ip.fitnessApp.model.FitnessProgram;
 import com.ip.fitnessApp.model.Kategorija;
 import com.ip.fitnessApp.repository.FitnessProgramRepository;
@@ -26,7 +27,9 @@ public class FitnessProgramService {
 
     public FitnessProgram findById(Integer id){
         return fitnessProgramRepository.findById(id)
-                .orElse(null);
+                .orElseThrow(
+                        () -> new RecordNotFoundException("Ne postoji fitnes program čiji je id = " + id + "!")
+                );
     }
 
     public FitnessProgram createProgram(FitnessProgram fitnessProgram) {
