@@ -148,7 +148,7 @@ insert into fitness_program(naziv_programa,opis, naziv_slike, trajanje_treninga,
  ('aerobni trening u teretani','trčanje na traci','assets/2.jfif','60 minuta',4,30,'teretana',7,'Arnold Švarceneger','066/777-214');
 insert into korisnik(ime,grad,avatar,mejl,broj_kartice,korisnicko_ime,lozinka,verifikovan,savjetnik) values 
 ('Marko Markovic','Banja Luka','mm_avatar.jpg','mmarkovic@gmail.com','1111','mm','mm',1,1),
-('Jovan Jovanovic','Banja Luka','jj_avatar.jpg','igorgrubisa@hotmail.com','2222','jj','jj',0,0),
+('Jovan Jovanovic','Banja Luka','jj_avatar.jpg','igorgrubisa@hotmail.com','2222','jj','jj',1,0),
 ('Mile Milanovic','Banja Luka','mml_avatar.jpg','mmilanovic@gmail.com','3333','mim','mm',0,0);
 insert into dnevnik(rezultati,datum,korisnik_id,program_id) values (54,'2024-3-2',2,1);
 insert into komentar(tekst,korisnik_id,program_id, datum) values ('trening je bio naporan',2,1,'2024-04-02 22:34'),('trening je bio naporan',2,1,'2024-04-02'),('trening je bio naporan',2,1,'2024-04-02'),

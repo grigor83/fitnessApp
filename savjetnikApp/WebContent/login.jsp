@@ -24,7 +24,6 @@
          	    savjetnik.setEmail(s.getEmail());
          	    savjetnik.setPrimljenePoruke(s.getPrimljenePoruke());
              	savjetnik.setLoggedIn(true);
-             	SavjetnikService.updateLogs();
              	session.setAttribute("notifikacija", "");
              	response.sendRedirect("savjetnik.jsp");
             }

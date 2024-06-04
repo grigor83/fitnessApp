@@ -214,31 +214,6 @@ public class SavjetnikService {
 		return s;
 	}
 	
-	public static void updateLogs() {
-		Connection connection = null;
-		String selectSQL = "SELECT * FROM log WHERE log_id = ?";        
-		String updateSQL = "UPDATE log SET broj_logova = ? WHERE log_id = ?"; 
-		try {
-			connection = connectionPool.checkOut();       
-	        PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
-	        preparedStatement.setInt(1, 1);
-	        ResultSet rs = preparedStatement.executeQuery();
-	        if (rs.next()) {
-	        	int logs = rs.getInt("broj_logova");
-	        	preparedStatement = connection.prepareStatement(updateSQL);
-	        	preparedStatement.setInt(1,logs+1);
-		        preparedStatement.setInt(2,1);
-		        preparedStatement.executeUpdate();
-	        }
-	        
-	        preparedStatement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			connectionPool.checkIn(connection);
-		}
-	}
-	
 	public static ArrayList<PorukaBean> getUsersMessages(SavjetnikBean savjetnik) throws IOException, ClassNotFoundException, SQLException{
     	ArrayList<PorukaBean> temp = new ArrayList<>();
     	
