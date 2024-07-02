@@ -26,7 +26,7 @@ export class HistoryTabComponent {
   loadParticipations() {
     this.userService.getAllParticipations()
       .subscribe(response => {
-        response = response.filter(participation => participation.korisnik?.korisnikId == this.userService.activeUser?.korisnikId);
+        response = response.filter(participation => participation.user?.id == this.userService.activeUser?.id);
         this.dataSource = new MatTableDataSource<Participation>(response);
       });
   }

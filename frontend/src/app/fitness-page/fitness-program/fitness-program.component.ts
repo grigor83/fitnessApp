@@ -45,7 +45,7 @@ export class FitnessProgramComponent {
     // Dohvati program sa servera kako bi se osvjezili komentari i prikazali novi komentari
     dialogRef.afterClosed().subscribe(result => {
       if (result != null && result.komentar != null){
-        this.programService.getProgram(this.fitnesProgram.programId).subscribe(response => {
+        this.programService.getProgram(this.fitnesProgram.id).subscribe(response => {
           this.fitnesProgram = response;
         });
       }

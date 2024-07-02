@@ -3,17 +3,17 @@ package dto;
 public class Administrator {
 	// DTO klasa mapira sve atribute iz tabele administrator u bazi podataka
 	private int id;
-	private String ime, prezime, korisnickoIme, lozinka;
+	private String firstName, lastName, username, password;
 
 	public Administrator() { }
 
-	public Administrator(int id, String ime, String prezime, String korisnickoIme, String lozinka) {
+	public Administrator(int id, String firstName, String lastName, String username, String password) {
 		super();
 		this.id = id;
-		this.ime = ime;
-		this.prezime = prezime;
-		this.korisnickoIme = korisnickoIme;
-		this.lozinka = lozinka;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
 	}
 
 	public int getId() {
@@ -24,36 +24,36 @@ public class Administrator {
 		this.id = id;
 	}
 
-	public String getIme() {
-		return ime;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getPrezime() {
-		return prezime;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getKorisnickoIme() {
-		return korisnickoIme;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getLozinka() {
-		return lozinka;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

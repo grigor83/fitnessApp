@@ -1,53 +1,53 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Naziv </th>
-        <td mat-cell *matCellDef="let element"> {{element.nazivPrograma}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.programName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef> Opis </th>
-        <td mat-cell *matCellDef="let element"> {{element.opis}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
   
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef> Kategorija </th>
-      <td mat-cell *matCellDef="let element"> {{element.kategorija.nazivKategorije}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.category.categoryName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="location">
         <th mat-header-cell *matHeaderCellDef> Lokacija </th>
-        <td mat-cell *matCellDef="let element"> {{element.lokacija}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
     </ng-container>
   
     <ng-container matColumnDef="time">
         <th mat-header-cell *matHeaderCellDef> Trajanje treninga </th>
-        <td mat-cell *matCellDef="let element"> {{element.trajanje}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
     </ng-container>
   
     <ng-container matColumnDef="difficulty">
       <th mat-header-cell *matHeaderCellDef> Nivo tezine </th>
-      <td mat-cell *matCellDef="let element"> {{element.nivoTezine}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.intensity}} </td>
   </ng-container>
   
   <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Cijena </th>
-      <td mat-cell *matCellDef="let element"> {{element.cijena}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
   </ng-container>
   
     <ng-container matColumnDef="instructor">
       <th mat-header-cell *matHeaderCellDef> Instruktor </th>
-      <td mat-cell *matCellDef="let element"> {{element.imeInstruktora}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.instructorName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="contact">
       <th mat-header-cell *matHeaderCellDef> Kontakt </th>
-      <td mat-cell *matCellDef="let element"> {{element.kontakt}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.instructorContact}} </td>
     </ng-container>
   
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> Slika </th>
       <td mat-cell *matCellDef="let element"> 
-          <img height="50" width="100" [src]="element.nazivSlike" alt="-" *ngIf="element.nazivSlike" style="padding: 5px;"/>            
+          <img height="50" width="100" [src]="element.imagePath" alt="-" *ngIf="element.imagePath" style="padding: 5px;"/>            
       </td>
     </ng-container>
   

@@ -9,19 +9,21 @@ public class LogBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String poruka, datum, logger;
+	private String message, logDate, logger;
 	private ArrayList<LogBean> logs = new ArrayList<>();
 
 
 	public LogBean() {}
 
-	public LogBean(int id, String poruka, String datum, String logger) {
+	public LogBean(int id, String message, String logDate, String logger) {
 		super();
 		this.id = id;
-		this.poruka = poruka;
-		this.datum = datum;
+		this.message = message;
+		this.logDate = logDate;
 		this.logger = logger;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -31,20 +33,21 @@ public class LogBean implements Serializable {
 		this.id = id;
 	}
 	
-	public String getPoruka() {
-		return poruka;
+
+	public String getMessage() {
+		return message;
 	}
 
-	public void setPoruka(String poruka) {
-		this.poruka = poruka;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
-	public String getDatum() {
-		return datum;
+	public String getLogDate() {
+		return logDate;
 	}
 
-	public void setDatum(String datum) {
-		this.datum = datum;
+	public void setLogDate(String logDate) {
+		this.logDate = logDate;
 	}
 
 	public String getLogger() {

@@ -3,28 +3,31 @@
     <h2 mat-dialog-title>Unesi nove podatke</h2>
 
     <label>Ime i prezime: </label>
-    <input type="text" [(ngModel)]="user.ime" name="name" required>
+    <input type="text" [(ngModel)]="user.name" name="name" required>
     <label>Grad: </label>
-    <input type="text" [(ngModel)]="user.grad" name="city" required>
+    <input type="text" [(ngModel)]="user.city" name="city" required>
     <label>Lozinka: </label>
-    <input type="password" [(ngModel)]="user.lozinka" name="password" required>
+    <input type="password" [(ngModel)]="user.password" name="password" required>
     <label>Email: </label>
-    <input type="email" [(ngModel)]="user.mejl" name="email" required>
+    <input type="email" [(ngModel)]="user.mail" name="email" required>
     <label>Broj kartice: </label>
-    <input type="text" [(ngModel)]="user.brojKartice" name="cardnumber" required>
+    <input type="text" [(ngModel)]="user.cardNumber" name="cardnumber" required>
     <label>Avatar: </label>
     <mat-select [(ngModel)]="user.avatar" name="avatar">
       <mat-option *ngFor="let avatarUrl of avatarUrls" [value]="avatarUrl">
         <img [src]="avatarUrl" style="max-height: 40px; max-width: 40px;"> {{avatarUrl.split('/')[1]}}
       </mat-option>
     </mat-select>
-    <label>Pretplata: </label>
-    <select  [ngModel]="user.pretplata?.kategorijaId" name="pretplata">
-      <option *ngFor="let category of categoriesList" [value]="category.kategorijaId">{{ category.nazivKategorije + '-' + category.atribut.nazivAtributa }}</option>
-      <option [value]="-1">{{selectedValue}}</option>
-    </select>
+    <label>Pretplati se: </label>
+    <ul style="list-style-type: none; text-align: left;">
+      <li *ngFor="let category of categoriesList;">
+        {{ category.categoryName + '-' + category.attribute.attributeName }}
+            <input type="checkbox" #checkbox [value]="category.id"  [checked]="category.selected"
+            ngModel name="check" (ngModelChange)="onCheckboxChange(category)">
+      </li>
+    </ul>
 
-    <div style="margin-top: 25px;">
+    <div>
         <button type="submit">Promijeni</button>
     </div>
   </form>

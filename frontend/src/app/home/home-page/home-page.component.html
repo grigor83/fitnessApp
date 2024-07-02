@@ -8,14 +8,14 @@
                 <div class="filter-container">
                     <div class="first">
                         <mat-select [(ngModel)]="resetSelect" #select placeholder="Kategorija" (selectionChange)="filterByKategorija($event.value)">
-                            <mat-option *ngFor="let category of distinctCategoriesList" [value]="category.nazivKategorije">{{ category.nazivKategorije }}</mat-option>
+                            <mat-option *ngFor="let category of distinctCategoriesList" [value]="category.categoryName">{{ category.categoryName }}</mat-option>
                             <mat-option value="poništi">poništi</mat-option>
                         </mat-select>
                     </div>
     
                     <div class="second">
                         <mat-select [(ngModel)]="resetSelect" #select placeholder="Atribut kategorije" (selectionChange)="filterByAtribut($event.value)">
-                            <mat-option *ngFor="let category of categoriesList" [value]="category.atribut.nazivAtributa">{{ category.atribut.nazivAtributa }}</mat-option>
+                            <mat-option *ngFor="let category of categoriesList" [value]="category.attribute.attributeName">{{ category.attribute.attributeName }}</mat-option>
                             <mat-option value="poništi">poništi</mat-option>
                         </mat-select>
                     </div>        
@@ -28,11 +28,11 @@
                     <th mat-header-cell *matHeaderCellDef> Fitnes programi </th>
                         <p *ngIf="data.length==0" style="text-align: center;">Fitnes programi nisu učitani!</p>
                         <td mat-cell *matCellDef="let program" (click)="selectedProgram(program)"> 
-                            <div *ngIf="program.nazivSlike else noImage">
-                                <app-fitness-program-card [naziv]="program.nazivPrograma" [cijena]=program.cijena  [nazivSlike]="program.nazivSlike"></app-fitness-program-card>
+                            <div *ngIf="program.programName else noImage">
+                                <app-fitness-program-card [naziv]="program.programName" [cijena]=program.price  [nazivSlike]="program.imagePath"></app-fitness-program-card>
                             </div>
                             <ng-template #noImage>
-                                <app-fitness-program-card [naziv]="program.nazivPrograma" [cijena]=program.cijena></app-fitness-program-card>
+                                <app-fitness-program-card [naziv]="program.programName" [cijena]=program.price></app-fitness-program-card>
                             </ng-template>
                         </td>
                     </ng-container>

@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <jsp:useBean id="selectedUser" class="dto.User" scope="session"></jsp:useBean>    
     
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Promijeni podatke o korisniku</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -23,12 +23,12 @@
 				<div>
 					<label>Ime: </label>
     				<input type="text" name="ime" autofocus="autofocus" required
-    				value="<%= selectedUser.getIme() %>" >
+    				value="<%= selectedUser.getFirstName() %>" >
 				</div>
 				<div>
 					<label>Grad: </label>
     				<input type="text" name="grad" required
-    				value="<%= selectedUser.getGrad() %>" >
+    				value="<%= selectedUser.getCity() %>" >
 				</div>
 				<div>
 					<label>Email: </label>
@@ -38,17 +38,17 @@
 				<div>
 					<label>Korisnicko ime: </label>
     				<input type="text" name="username" required
-    				value="<%= selectedUser.getKorisnickoIme() %>" >
+    				value="<%= selectedUser.getUsername() %>" >
 				</div>
 				<div>
 					<label>Lozinka: </label>
     				<input type="text" name="password" required
-    				value="<%= selectedUser.getLozinka() %>" >
+    				value="<%= selectedUser.getPassword() %>" >
 				</div>
 				<div>
 					<label>Savjetnik: </label>
 					<select name="savjetnik" required>
-    					<option value="<%= selectedUser.isSavjetnik() %>" selected><%= selectedUser.isSavjetnik() %></option>
+    					<option value="<%= selectedUser.isCouncelor() %>" selected><%= selectedUser.isCouncelor() %></option>
     					<option value="false">false</option>
     					<option value="true">true</option>
     				</select>
@@ -56,7 +56,7 @@
 				<div>
 					<label>Verifikovan: </label>
     				<select name="verifikovan" required>
-    					<option value="<%= selectedUser.isVerifikovan() %>" selected><%= selectedUser.isVerifikovan() %></option>
+    					<option value="<%= selectedUser.isVerified() %>" selected><%= selectedUser.isVerified() %></option>
     					<option value="false">false</option>
     					<option value="true">true</option>
     				</select>

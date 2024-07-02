@@ -4,7 +4,7 @@ import { FitnessProgram } from '../../models/fitness-program';
 import { ProgramService } from '../../services/program.service';
 import { NgFor, NgIf } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Kategorija } from '../../models/kategorija';
+import { Category } from '../../models/category';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class UploadFormComponent {
 
   selectedFile!: File;
   isImageSelected : boolean = true;
-  categoriesList: Kategorija[] = [];
+  categoriesList: Category[] = [];
   selectedOption!: string | null;
 
   constructor(private userService : UserService, private programService : ProgramService) { 

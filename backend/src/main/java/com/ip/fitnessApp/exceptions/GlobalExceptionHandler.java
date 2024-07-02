@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 //However, if we want to handle any exception thrown throughout the application we can define a global
 // exception handler class and annotate it with @ControllerAdvice.This annotation helps to integrate
 // multiple exception handlers into a single global unit.
-// Scenario: u korisnik servisu se baca izuzetak RecordNotFoundException ako korisnik pokusa da pronadje zapis u bazi
+// Scenario: u user servisu se baca izuzetak RecordNotFoundException ako user pokusa da pronadje zapis u bazi
 // na osnovu id-a koji ne postoji. Taj izuzetak ce uhvatiti ova klasa i pozvati odgovarajuci metod.
 // U metodama ove klase se prvo kreira Log objekat pomocu poziva log servisa i njegovog metoda createLog(). Na taj
 // nacin se Log objekat smjesta u bazu podataka. 

@@ -33,7 +33,7 @@ export class ProgramsTabComponent implements OnInit {
   loadPrograms(){
     this.programService.getAllPrograms()
       .subscribe(response => {
-        this.dataSource = new MatTableDataSource<FitnessProgram>(response.filter(program => program.autor?.ime == this.userService.activeUser?.ime));
+        this.dataSource = new MatTableDataSource<FitnessProgram>(response.filter(program => program.author?.name == this.userService.activeUser?.name));
       });
   }
 
@@ -44,7 +44,7 @@ export class ProgramsTabComponent implements OnInit {
       .afterClosed()
       .subscribe(result => {
         if (result) {
-          this.programService.deleteProgram(element.programId)
+          this.programService.deleteProgram(element.id)
             .subscribe(response => {
                         this.loadPrograms();
             })

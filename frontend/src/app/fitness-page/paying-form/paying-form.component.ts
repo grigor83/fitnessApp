@@ -25,7 +25,7 @@ export class PayingFormComponent {
 
     payProgram(payingForm: NgForm) {
       if (this.selectedValue != 'lično' && this.selectedValue != ''){
-        if (this.userService.activeUser?.brojKartice != payingForm.value.brojKartice){
+        if (this.userService.activeUser?.cardNumber != payingForm.value.brojKartice){
           alert("Broj kartice nije validan!");
           return;
         }

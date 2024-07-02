@@ -1,31 +1,32 @@
 package dto;
 
 public class Atribut {
-	private int atributId;
-	private String nazivAtributa;
+	private int id;
+	private String attributeName;
 
 	public Atribut() { }
 
-	public Atribut(int atributId, String nazivAtributa) {
+	public Atribut(int id, String attributeName) {
 		super();
-		this.atributId = atributId;
-		this.nazivAtributa = nazivAtributa;
+		this.id = id;
+		this.attributeName = attributeName;
 	}
 
-	public int getAtributId() {
-		return atributId;
+	public int getId() {
+		return id;
 	}
 
-	public void setAtributId(int atributId) {
-		this.atributId = atributId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getNazivAtributa() {
-		return nazivAtributa;
+	public String getAttributeName() {
+		return attributeName;
 	}
 
-	public void setNazivAtributa(String nazivAtributa) {
-		this.nazivAtributa = nazivAtributa;
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
 	}
+
 	
 }

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <%@page import="dto.Atribut"%>
 <jsp:useBean id="attributesBean" class="beans.AttributesBeans" scope="session"></jsp:useBean>
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Nova kategorija</title>
 	<link rel="stylesheet" href="style.css">
 </head>
@@ -34,7 +34,7 @@
 						<%
 							for (Atribut atribut : attributesBean.getAtributes()) {
 						%> 
-							<option value="<%=atribut.getAtributId() %>"> <%=atribut.getNazivAtributa() %> </option>
+							<option value="<%=atribut.getId() %>"> <%=atribut.getAttributeName() %> </option>
 						<% } %>
 					</select>
 				</div>

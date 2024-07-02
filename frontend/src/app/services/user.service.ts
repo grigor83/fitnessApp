@@ -11,7 +11,7 @@ import { Message } from '../models/message';
 })
 export class UserService {
   
-  private url = 'http://localhost:8080/korisnik';
+  private url = 'http://localhost:8080/users';
 
   public users: Array<User> = [];
   public signedIn: boolean = false;
@@ -29,7 +29,7 @@ export class UserService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.url}/${user.korisnikId}`, user);    
+    return this.httpClient.put<User>(`${this.url}/${user.id}`, user);    
   }
 
   public login(username: string, password: string): boolean {
@@ -38,15 +38,12 @@ export class UserService {
     let userExists = false;
 
     for (const user of this.users){
-      if (user.korisnickoIme == username && user.lozinka == password) {
-        if (user.verifikovan){
+      if (user.username == username && user.password == password) {
+        if (user.verified){
           result = true;
           this.activeUser = user;
           userExists = true;
-          this.updateLogs().subscribe(response => {
-            console.log(response);
-          });
-          alert("Zdravo, " + this.activeUser.korisnickoIme + "! Uspješno ste se ulogovali!");
+          alert("Zdravo, " + this.activeUser.username + "! Uspješno ste se ulogovali!");
           break;
         }
         else {
@@ -68,30 +65,25 @@ export class UserService {
     return result;
   }
 
-  private updateLogs() {
-    const logUrl = 'http://localhost:8080/logs';
-    return this.httpClient.put<any>(`${logUrl}/${1}`, 1);
-  }
-
   public logout(){
     this.activeUser = null;
     this.signedIn = false;
   }
 
   payProgram(newParticipation: Participation): Observable<Participation> {
-    return this.httpClient.post<Participation>('http://localhost:8080/ucestvuje', newParticipation);
+    return this.httpClient.post<Participation>('http://localhost:8080/participations', newParticipation);
   }
 
   getAllParticipations(): Observable<Participation[]>{
-    return this.httpClient.get<Participation[]>('http://localhost:8080/ucestvuje');
+    return this.httpClient.get<Participation[]>('http://localhost:8080/participations');
   }
 
   sendMessage(message : Message){
-    return this.httpClient.post<User>('http://localhost:8080/poruka',message);
+    return this.httpClient.post<User>('http://localhost:8080/messages',message);
   }
 
   getUsersMessages(user : User|null){
-    return this.httpClient.get<Message[]>(`http://localhost:8080/poruka/user/${user?.korisnikId}`)
+    return this.httpClient.get<Message[]>(`http://localhost:8080/messages/${user?.id}`)
   }
 
 }

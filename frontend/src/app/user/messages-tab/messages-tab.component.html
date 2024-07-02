@@ -14,7 +14,7 @@
                         <li *ngFor="let user of usersList"  
                             (click)="onListItemClick(user)"
                             [class.selected]="selectedReceiver === user">
-                            {{ user.korisnickoIme }}
+                            {{ user.username }}
                         </li>
                     </ul>
                 </div>
@@ -23,7 +23,7 @@
                         <li *ngFor="let counselor of counselorList"  
                             (click)="onListItemClick(counselor)"
                             [class.selected]="selectedReceiver === counselor">
-                            {{ counselor.korisnickoIme }}
+                            {{ counselor.username }}
                         </li>
                     </ul>
                 </div>
@@ -46,7 +46,7 @@
                 <ul style="width: 350px; height: 400px; margin-top: 10px;">
                     <li *ngFor="let message of receivedMessages"  
                         (click)="onMessageClick(message)">
-                        {{ 'Posiljalac: ' +  message.posiljalac?.korisnickoIme + ' >> Datum slanja: ' + message.datum }}
+                        {{ 'Posiljalac: ' +  message.sender?.username + ' >> Datum slanja: ' + message.date }}
                     </li>
                     <li *ngIf="receivedMessages?.length==0">Nemate primljenih poruka!</li>
                 </ul>

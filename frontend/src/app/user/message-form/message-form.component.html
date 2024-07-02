@@ -1,13 +1,13 @@
 <mat-card class="example-card">
     <mat-card-content>
       <p>
-        {{ message.tekst }}
+        {{ message.content }}
       </p>
     </mat-card-content>
   
     <mat-card-actions>
-      <label>Poslao: {{ message.posiljalac?.korisnickoIme }}</label>
-      <label>Datum slanja: {{ message.datum }} </label>
+      <label>Poslao: {{ message.sender?.username }}</label>
+      <label>Datum slanja: {{ message.date }} </label>
     </mat-card-actions>
 
   </mat-card>

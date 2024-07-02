@@ -4,7 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ProgramService } from '../../services/program.service';
 import { FitnessProgram } from '../../models/fitness-program';
-import { Kategorija } from '../../models/kategorija';
+import { Category } from '../../models/category';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class EditFormComponent {
   selectedFile!: File;
   isImageSelected : boolean = true;
   program!: FitnessProgram;
-  categoriesList: Kategorija[] = [];
+  categoriesList: Category[] = [];
 
   constructor(private userService : UserService, private programService : ProgramService, 
     @Inject(MAT_DIALOG_DATA) public data: FitnessProgram, private dialogRef: MatDialogRef<EditFormComponent>) { 
@@ -44,7 +44,7 @@ export class EditFormComponent {
       return;
     }
 
-    this.program.kategorija = this.categoriesList[form.value.kategorija-1];
+    this.program.category = this.categoriesList[form.value.kategorija-1];
     // Zbog two-way binding-a, ne moram u varijablu this.user da sacuvam nove vrijednosti iz forme
     this.programService.updateProgram(this.program, this.selectedFile).subscribe(response => {
       console.log(response);

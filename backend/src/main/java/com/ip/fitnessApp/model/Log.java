@@ -15,15 +15,15 @@ import java.time.LocalDateTime;
 public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "log_id")
-    private int logId;
+    @Column(name = "id")
+    private int id;
     @Basic
-    @Column(name = "poruka")
-    private String poruka;
+    @Column(name = "message")
+    private String message;
     @Basic
-    @Column(name = "datum")
+    @Column(name = "log_date")
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd.MM.yyyy. HH:mm")
-    private LocalDateTime datum;
+    private LocalDateTime date;
     @Basic
     @Column(name = "logger")
     private String logger;

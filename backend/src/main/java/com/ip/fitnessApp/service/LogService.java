@@ -22,10 +22,10 @@ public class LogService {
         return logRepository.findAll();
     }
 
-    public void saveLog(String poruka, String logger) {
+    public void saveLog(String message, String logger) {
         Log newLog = new Log();
-        newLog.setPoruka(poruka);
-        newLog.setDatum(LocalDateTime.now());
+        newLog.setMessage(message);
+        newLog.setDate(LocalDateTime.now());
         newLog.setLogger(logger);
 
         logRepository.save(newLog);

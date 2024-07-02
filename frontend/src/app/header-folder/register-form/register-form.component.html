@@ -21,11 +21,13 @@
         <img [src]="avatarUrl" style="max-height: 40px; max-width: 40px;"> {{avatarUrl.split('/')[1]}}
       </mat-option>
     </mat-select>
-    <label>Pretplata: </label>
-    <select  ngModel name="pretplata">
-      <option *ngFor="let category of categoriesList" [value]="category.kategorijaId">{{ category.nazivKategorije + '-' + category.atribut.nazivAtributa }}</option>
-      <option [value]="-1">{{selectedValue}}</option>
-    </select>
+    <label>Pretplati se: </label>
+    <ul style="list-style-type: none; text-align: left;">
+      <li *ngFor="let category of categoriesList;">
+        {{ category.categoryName + '-' + category.attribute.attributeName }}
+            <input type="checkbox" #checkbox [value]="category.id">
+      </li>
+    </ul>
   </form>
 </mat-dialog-content>
 

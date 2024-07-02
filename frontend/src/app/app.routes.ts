@@ -8,7 +8,7 @@ import { GuardFitnesspageService } from './services/guard-fitnesspage.service';
 export const routes: Routes = [
     {path : "home", component : HomePageComponent},
     {path: '', redirectTo : '/home', pathMatch : 'full'},
-    {path : "fitnes-program", component : FitnessProgramComponent, canActivate : [GuardFitnesspageService]},
+    {path : "fitness-program", component : FitnessProgramComponent, canActivate : [GuardFitnesspageService]},
     {path : "user-page", component : ContainerPageComponent, canActivate : [GuardService]},
     {path: '**', component : HomePageComponent}
 ];

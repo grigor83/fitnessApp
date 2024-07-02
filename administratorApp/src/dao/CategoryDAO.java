@@ -12,14 +12,14 @@ import dto.Category;
 public class CategoryDAO {
 	
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-	private static final String SELECT_ALL_CATEGORIES = "SELECT * FROM kategorija";
-	private static final String SELECT_CATEGORY = "SELECT * FROM kategorija WHERE kategorija_id = ?";
-	private static final String INSERT_NEW_CATEGORY = "INSERT INTO kategorija (naziv_kategorije, atribut_id) VALUES (?,?)";
-	private static final String UPDATE_CATEGORY = "UPDATE kategorija SET naziv_kategorije = ?, atribut_id = ? WHERE kategorija_id = ?";
-	private static final String DELETE_CATEGORY = "DELETE FROM kategorija WHERE kategorija_id = ?";
-	private static final String SELECT_ALL_ATTRIBUTES = "SELECT * FROM atribut";
-	private static final String SELECT_ATTRIBUTE = "SELECT * FROM atribut WHERE atribut_id=?";
-	private static final String INSERT_NEW_ATTRIBUTE = "INSERT INTO atribut (naziv_atributa) VALUES (?)";
+	private static final String SELECT_ALL_CATEGORIES = "SELECT * FROM category";
+	private static final String SELECT_CATEGORY = "SELECT * FROM category WHERE id = ?";
+	private static final String INSERT_NEW_CATEGORY = "INSERT INTO category (category_name, attribute_id) VALUES (?,?)";
+	private static final String UPDATE_CATEGORY = "UPDATE category SET category_name = ?, attribute_id = ? WHERE id = ?";
+	private static final String DELETE_CATEGORY = "DELETE FROM category WHERE id = ?";
+	private static final String SELECT_ALL_ATTRIBUTES = "SELECT * FROM attribute";
+	private static final String SELECT_ATTRIBUTE = "SELECT * FROM attribute WHERE id=?";
+	private static final String INSERT_NEW_ATTRIBUTE = "INSERT INTO attribute (attribute_name) VALUES (?)";
 	
 	public static ArrayList<Category> loadCategories() {
 		ArrayList<Category> categories = new ArrayList<>();
@@ -31,13 +31,13 @@ public class CategoryDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-	            int id = rs.getInt("kategorija_id");
-	            String ime = rs.getString("naziv_kategorije");
-	            Object values[] = { rs.getInt("atribut_id") };
+	            int id = rs.getInt("id");
+	            String ime = rs.getString("category_name");
+	            Object values[] = { rs.getInt("attribute_id") };
 	            pstmt = ConnectionPool.prepareStatement(connection, SELECT_ATTRIBUTE, false, values);
 	            ResultSet rs2 = pstmt.executeQuery();
 	            if (rs2.next())
-	            	categories.add(new Category(id, ime, rs2.getInt("atribut_id"), rs2.getString("naziv_atributa")));
+	            	categories.add(new Category(id, ime, rs2.getInt("id"), rs2.getString("attribute_name")));
 	        }
 			
 			pstmt.close();
@@ -61,13 +61,13 @@ public class CategoryDAO {
 			PreparedStatement pstmt = ConnectionPool.prepareStatement(connection, SELECT_CATEGORY, false, values);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				int id = rs.getInt("kategorija_id");
-	            String ime = rs.getString("naziv_kategorije");
-	            Object values2[] = { rs.getInt("atribut_id") };
+				int id = rs.getInt("id");
+	            String ime = rs.getString("category_name");
+	            Object values2[] = { rs.getInt("attribute_id") };
 	            pstmt = ConnectionPool.prepareStatement(connection, SELECT_ATTRIBUTE, false, values2);
 	            ResultSet rs2 = pstmt.executeQuery();
 	            if (rs2.next())
-	            	selectedCategory = new Category(id, ime, rs2.getInt("atribut_id"), rs2.getString("naziv_atributa"));
+	            	selectedCategory = new Category(id, ime, rs2.getInt("id"), rs2.getString("attribute_name"));
 			}
 
 			pstmt.close();
@@ -157,8 +157,8 @@ public class CategoryDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-	            int id = rs.getInt("atribut_id");
-	            String ime = rs.getString("naziv_atributa");
+	            int id = rs.getInt("id");
+	            String ime = rs.getString("attribute_name");
 	            atributes.add(new Atribut(id, ime));
 	        }
 			

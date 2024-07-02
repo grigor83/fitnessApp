@@ -1,6 +1,6 @@
 <%@page import="beans.LogBean"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@page import="dto.Category"%>
 <jsp:useBean id="categoriesBean" class="beans.CategoriesBean" scope="session"></jsp:useBean>
@@ -59,7 +59,7 @@
 					<th>Naziv kategorije</th>
 					<th>Atribut kategorije</th>
 					<th>Izmijeni kategoriju</th>
-					<th>Obrisi kategoriju</th>
+					<th>Obriši kategoriju</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -67,8 +67,8 @@
 					for (Category category : categoriesBean.getCategories()) {
 				%> 
 					<tr>
-						<td><%= category.getNazivKategorije() %></td>
-						<td><%= category.getNazivAtributa() %></td>
+						<td><%= category.getCategoryName() %></td>
+						<td><%= category.getAttributeName() %></td>
 						<td><label style="text-align: center; width: 80px;"><a href="?action=updateCategory&id=<%= category.getId() %>">Izmijeni</a></label> </td>
             			<td><label style="text-align: center; width: 80px;"><a href="?action=deleteCategory&id=<%= category.getId() %>">Obrisi</a></label> </td>
 					</tr>
@@ -86,12 +86,12 @@
 					<tr>
 					<th>Ime</th>
 					<th>Grad</th>
-					<th>Korisnicko ime</th>
+					<th>Korisničko ime</th>
 					<th>Lozinka</th>
 					<th>Savjetnik</th>
 					<th>Verifikovan</th>
 					<th>Izmijeni korisnika</th>
-					<th>Obrisi korisnika</th>
+					<th>Obriši korisnika</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -99,12 +99,12 @@
 					for (User user : usersBean.getUsers()) {
 				%> 
 					<tr>
-						<td><%= user.getIme() %></td>
-						<td><%= user.getGrad() %></td>
-						<td><%= user.getKorisnickoIme() %></td>
-						<td><%= user.getLozinka() %></td>
-						<td><%= user.isSavjetnik() %></td>
-						<td><%= user.isVerifikovan() %></td>
+						<td><%= user.getFirstName() %></td>
+						<td><%= user.getCity() %></td>
+						<td><%= user.getUsername() %></td>
+						<td><%= user.getCardNumber() %></td>
+						<td><%= user.isCouncelor() %></td>
+						<td><%= user.isVerified() %></td>
 						<td><label style="text-align: center; width: 80px;"><a href="?action=updateUser&id=<%= user.getId() %>">Izmijeni</a></label> </td>
             			<td><label style="text-align: center; width: 80px;"><a href="?action=deleteUser&id=<%= user.getId() %>">Obrisi</a></label> </td>
 					</tr>
@@ -130,8 +130,8 @@
 					for (LogBean log : logsBean.getLogs()) {
 				%> 
 					<tr>
-						<td><%= log.getPoruka() %></td>
-						<td><%= log.getDatum() %></td>
+						<td><%= log.getMessage() %></td>
+						<td><%= log.getLogDate() %></td>
 						<td><%= log.getLogger() %></td>
 					</tr>
 				<% } %>

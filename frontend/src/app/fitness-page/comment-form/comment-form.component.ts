@@ -28,7 +28,7 @@ export class CommentFormComponent {
       let currentDateTime = this.datepipe.transform(new Date(), 'dd.MM.yyyy. HH:mm');
       const newKomentar = new Comment(this.fitnessProgram, currentDateTime, komentarForm.value.tekst);
       if (this.userService.activeUser != null)
-         newKomentar.korisnik = this.userService.activeUser;
+         newKomentar.user = this.userService.activeUser;
       this.programService.uploadComment(newKomentar).subscribe(response => {
         this.dialogRef.close({ komentar : 'postavljen' });
       });

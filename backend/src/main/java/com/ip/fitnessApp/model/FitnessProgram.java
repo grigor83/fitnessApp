@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -16,48 +17,51 @@ public class FitnessProgram {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "program_id")
-    private int programId;
+    @Column(name = "id")
+    private int id;
     @Basic
-    @Column(name = "naziv_programa")
-    private String nazivPrograma;
+    @Column(name = "program_name")
+    private String programName;
     @Basic
-    @Column(name = "opis")
-    private String opis;
+    @Column(name = "program_description")
+    private String description;
     @Basic
-    @Column(name = "naziv_slike")
-    private String nazivSlike;
+    @Column(name = "image_path")
+    private String imagePath;
     @Basic
-    @Column(name = "trajanje_treninga")
-    private String trajanje;
+    @Column(name = "duration")
+    private String duration;
     @Basic
-    @Column(name = "nivo_tezine")
-    private Integer nivoTezine;
+    @Column(name = "intensity")
+    private Integer intensity;
     @Basic
-    @Column(name = "cijena")
-    private Integer cijena;
+    @Column(name = "price")
+    private Integer price;
     @Basic
-    @Column(name = "lokacija")
-    private String lokacija;
+    @Column(name = "location")
+    private String location;
     @Basic
-    @Column(name = "instruktor_ime")
-    private String imeInstruktora;
+    @Column(name = "instructor_name")
+    private String instructorName;
     @Basic
-    @Column(name = "instruktor_kontakt")
-    private String kontakt;
+    @Column(name = "instructor_contact")
+    private String instructorContact;
 
     @ManyToOne
-    @JoinColumn(name = "kategorija_id")
-    private Kategorija kategorija;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Korisnik autor;
+    @JoinColumn(name = "author_id")
+    private User author;
 
     @OneToMany(mappedBy = "program", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     //cascade = CascadeType.ALL znaci da kad obrisem program iz baze, brisu se i svi komentari iz baze,
     // jer je program parent a komentari su child
     @JsonManagedReference
-    private List<Komentar> komentari;
+    private List<Comment> comments;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
 }

@@ -13,9 +13,9 @@ import dto.Administrator;
 public class AdminDAO {
 
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-	private static final String SELECT = "SELECT * FROM administrator WHERE korisnicko_ime=? AND lozinka=?";
-	private static final String IS_USERNAME_USED = "SELECT * FROM administrator WHERE korisnicko_ime= ?";
-	private static final String INSERT = "INSERT INTO administrator (ime, prezime, korisnicko_ime, lozinka) VALUES (?,?,?,?)";
+	private static final String SELECT = "SELECT * FROM administrator WHERE username=? AND admin_password=?";
+	private static final String IS_USERNAME_USED = "SELECT * FROM administrator WHERE username= ?";
+	private static final String INSERT = "INSERT INTO administrator (first_name, last_name, username, admin_password) VALUES (?,?,?,?)";
 	
 	public static Administrator selectByUsernameAndPassword(String username, String password){
 		Administrator admin = null;
@@ -27,8 +27,8 @@ public class AdminDAO {
 			PreparedStatement pstmt = ConnectionPool.prepareStatement(connection, SELECT, false, values);
 			rs = pstmt.executeQuery();
 			if (rs.next()){
-				admin = new Administrator(rs.getInt("administrator_id"), rs.getString("ime"), rs.getString("prezime"), 
-										  rs.getString("korisnicko_ime"), rs.getString("lozinka"));
+				admin = new Administrator(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"), 
+										  rs.getString("username"), rs.getString("admin_password"));
 			}
 			pstmt.close();
 		} catch (SQLException exp) {
@@ -64,7 +64,7 @@ public class AdminDAO {
 		boolean result = false;
 		Connection connection = null;
 		ResultSet generatedKeys = null;
-		Object values[] = { admin.getIme(), admin.getPrezime(), admin.getKorisnickoIme(), admin.getLozinka() };
+		Object values[] = { admin.getFirstName(), admin.getLastName(), admin.getUsername(), admin.getPassword() };
 		try {
 			connection = connectionPool.checkOut();
 			PreparedStatement pstmt = ConnectionPool.prepareStatement(connection, INSERT, true, values);

@@ -8,7 +8,7 @@
         <button *ngIf="!(sharedService.buttonVisibility2$ | async)" (click)="register()">Registracija</button>
         <button *ngIf="sharedService.buttonVisibility2$ | async" (click)="userPage()">
             <img *ngIf="userService.activeUser?.avatar" [src]=userService.activeUser?.avatar style="width: 20px; height: 20px; float: left;">
-            {{ userService.activeUser?.korisnickoIme }}
+            {{ userService.activeUser?.username }}
         </button>
         <button *ngIf="sharedService.buttonVisibility2$ | async" (click)="logout()">Odjava</button>
     </div>

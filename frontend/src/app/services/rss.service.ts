@@ -12,7 +12,6 @@ export class RssService {
   constructor(private httpClient : HttpClient) { }
 
   getRssFeed() {
-    //const headers = new HttpHeaders().set('Origin', '*');
     return this.httpClient.get(this.url, { responseType: 'text' });
   }
 

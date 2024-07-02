@@ -14,7 +14,7 @@ import { FitnessProgram } from '../../models/fitness-program';
 import { ProgramService } from '../../services/program.service';
 import { SharedService } from '../../services/shared.service';
 import { RssService } from '../../services/rss.service';
-import { Kategorija } from '../../models/kategorija';
+import { Category } from '../../models/category';
 import { ExercisesComponent } from '../exercises/exercises.component';
 import { ExercisesService } from '../../services/exercises.service';
 import { UserService } from '../../services/user.service';
@@ -39,8 +39,8 @@ export class HomePageComponent {
   columnsToDisplay = ['fitnes programi'];
   data : FitnessProgram[] = [];
   resetSelect! : string;
-  categoriesList: Kategorija[] = [];
-  distinctCategoriesList: Kategorija[] = [];
+  categoriesList: Category[] = [];
+  distinctCategoriesList: Category[] = [];
   rssFeedData : any | null;
   exercises : any | null;
   
@@ -57,7 +57,7 @@ export class HomePageComponent {
     this.programService.getCategories().subscribe(response => {
       this.categoriesList = response;
       this.distinctCategoriesList = this.categoriesList.filter((item, index, self) =>
-        index === self.findIndex((t) => t.nazivKategorije === item.nazivKategorije)
+        index === self.findIndex((t) => t.categoryName === item.categoryName)
       );
     });
 
@@ -117,7 +117,7 @@ export class HomePageComponent {
     //this.router.navigate(['/fitnes-program'], { queryParams });
     // Drugi nacin je sigurniji i on koristi sharedService da bi razmijenio podatke izmedju komponenti koje nisu u odnosu parent-child
     this.sharedService.setFitnessProgram(program);
-    this.router.navigate(['/fitnes-program']);
+    this.router.navigate(['/fitness-program']);
   }
 
   filterByKategorija(filterValue: string) {
@@ -127,7 +127,7 @@ export class HomePageComponent {
     }
 
     this.dataSource.filterPredicate = (data: FitnessProgram, filter: string) => {
-      const categoryMatch = data.kategorija.nazivKategorije.toLowerCase().includes(filter);
+      const categoryMatch = data.category.categoryName.toLowerCase().includes(filter);
       return categoryMatch;
     };
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -144,7 +144,7 @@ export class HomePageComponent {
     }
     
     this.dataSource.filterPredicate = (data: FitnessProgram, filter: string) => {
-      const atributMatch = data.kategorija.atribut.nazivAtributa.toLowerCase().includes(filter);
+      const atributMatch = data.category.attribute.attributeName.toLowerCase().includes(filter);
       return atributMatch;
     };
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -158,8 +158,8 @@ export class HomePageComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filterPredicate = (data: FitnessProgram, filter: string) => {
-      const nameMatch = data.nazivPrograma.toLowerCase().includes(filter);
-      const categoryMatch = data.kategorija.nazivKategorije.toLowerCase().includes(filter);
+      const nameMatch = data.programName.toLowerCase().includes(filter);
+      const categoryMatch = data.category.categoryName.toLowerCase().includes(filter);
       return nameMatch || categoryMatch;
     };
     this.dataSource.filter = filterValue.trim().toLowerCase();

@@ -2,7 +2,6 @@ package com.ip.fitnessApp.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ip.fitnessApp.model.FitnessProgram;
-import com.ip.fitnessApp.model.Kategorija;
 import com.ip.fitnessApp.repository.FitnessProgramRepository;
 import com.ip.fitnessApp.service.FitnessProgramService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/program")
+@RequestMapping("/programs")
 public class FitnessProgramController {
 
     @Value("${upload.path}") // Configure the upload directory path in application.properties
@@ -61,26 +60,12 @@ public class FitnessProgramController {
         return ResponseEntity.ok(cards);
     }
 
-    @PostMapping
-    public ResponseEntity<FitnessProgram> save(@RequestBody FitnessProgram fitnessProgram) {
-        FitnessProgram newFitnessProgram = fitnessProgramService.createProgram(fitnessProgram);
-        return new ResponseEntity<>(newFitnessProgram, HttpStatus.CREATED);
-    }
-
-    @PostMapping("/upload")
+    @PostMapping()
     public ResponseEntity<FitnessProgram> createProgram(@RequestParam("program") String programJson,
                                                         @RequestPart("image") MultipartFile file) throws IOException {
-        if (file != null) {
-            Path filePath = Paths.get(System.getProperty("user.dir")+ File.separator + uploadPath + File.separator
-                    + file.getOriginalFilename());
-            Files.write(filePath, file.getBytes());
-        }
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        FitnessProgram fitnessProgram = objectMapper.readValue(programJson, FitnessProgram.class);
-        fitnessProgram.setNazivSlike("http://localhost:8080/" + file.getOriginalFilename());
-        FitnessProgram newFitnessProgram = fitnessProgramService.createProgram(fitnessProgram);
-        System.out.println(newFitnessProgram.getNazivSlike());
+        FitnessProgram newFitnessProgram = fitnessProgramService.createProgram(programJson, file);
+        System.out.println(newFitnessProgram.getImagePath());
 
         return new ResponseEntity<>(newFitnessProgram, HttpStatus.CREATED);
     }
@@ -96,11 +81,11 @@ public class FitnessProgramController {
             Path filePath = Paths.get(System.getProperty("user.dir")+ File.separator + uploadPath + File.separator
                     + file.getOriginalFilename());
             Files.write(filePath, file.getBytes());
-            fitnessProgram.setNazivSlike("http://localhost:8080/" + file.getOriginalFilename());
+            fitnessProgram.setImagePath("http://localhost:8080/" + file.getOriginalFilename());
         }
 
-        FitnessProgram updatedProgram = fitnessProgramService.updateProgram(fitnessProgram, fitnessProgram.getProgramId());
-        System.out.println(updatedProgram.getNazivSlike());
+        FitnessProgram updatedProgram = fitnessProgramService.updateProgram(fitnessProgram, fitnessProgram.getId());
+        System.out.println(updatedProgram.getImagePath());
         return new ResponseEntity<>(updatedProgram, HttpStatus.CREATED);
     }
 

@@ -23,9 +23,9 @@ public class LogDAO {
 	        ResultSet rs = pstmt.executeQuery();
 	        
 	        while (rs.next()) {
-	            int id = rs.getInt("log_id");
-	            String poruka = rs.getString("poruka");
-	            String datum = rs.getString("datum");
+	            int id = rs.getInt("id");
+	            String poruka = rs.getString("message");
+	            String datum = rs.getString("log_date");
 	            String logger = rs.getString("logger");
 	            logs.add(new LogBean(id, poruka, datum, logger));
 	        }

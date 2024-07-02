@@ -2,17 +2,17 @@ package dto;
 
 public class Category {
 	
-	private int id, atributId;
-	private String nazivKategorije, nazivAtributa;
+	private int id, attributeId;
+	private String categoryName, attributeName;
 	
 	public Category() {	}
 
-	public Category(int id, String nazivKategorije, int atributId, String nazivAtributa) {
+	public Category(int id, String categoryName, int attributeId, String attributeName) {
 		super();
 		this.id = id;
-		this.nazivKategorije = nazivKategorije;
-		this.atributId = atributId;
-		this.nazivAtributa = nazivAtributa;
+		this.attributeId = attributeId;
+		this.categoryName = categoryName;
+		this.attributeName = attributeName;
 	}
 
 	public int getId() {
@@ -23,34 +23,34 @@ public class Category {
 		this.id = id;
 	}
 
-	public String getNazivKategorije() {
-		return nazivKategorije;
+	public int getAttributeId() {
+		return attributeId;
 	}
 
-	public void setNazivKategorije(String nazivKategorije) {
-		this.nazivKategorije = nazivKategorije;
+	public void setAttributeId(int attributeId) {
+		this.attributeId = attributeId;
 	}
 
-	public int getAtributId() {
-		return atributId;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setAtributId(int atributId) {
-		this.atributId = atributId;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public String getNazivAtributa() {
-		return nazivAtributa;
+	public String getAttributeName() {
+		return attributeName;
 	}
 
-	public void setNazivAtributa(String nazivAtributa) {
-		this.nazivAtributa = nazivAtributa;
+	public void setAttributeName(String attributeName) {
+		this.attributeName = attributeName;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", nazivKategorije=" + nazivKategorije
-				+ ", nazivAtributa=" + nazivAtributa + "]";
+		return "Category [id=" + id + ", attributeId=" + attributeId + ", categoryName=" + categoryName
+				+ ", attributeName=" + attributeName + "]";
 	}
 	
 }

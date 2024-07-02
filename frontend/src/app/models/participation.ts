@@ -3,16 +3,16 @@ import { User } from "./user";
 
 export class Participation {
 
-    korisnik: User|null;
+    user: User|null;
     fitnessProgram : FitnessProgram;
-    datum : string;
-    nacinPlacanja : string;
+    paymentDate : string;
+    paymentMethod : string;
 
-    constructor(korisnik : User | null, program : FitnessProgram, datum : string | null, nacinPlacanja : string){
-        this.korisnik = korisnik ?? null;
+    constructor(user : User | null, program : FitnessProgram, paymentDate : string | null, paymentMethod : string){
+        this.user = user ?? null;
         this.fitnessProgram = program;
-        this.datum = datum ?? '';
-        this.nacinPlacanja = nacinPlacanja;
+        this.paymentDate = paymentDate ?? '';
+        this.paymentMethod = paymentMethod;
     }
 
 }

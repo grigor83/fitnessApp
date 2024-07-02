@@ -2,23 +2,25 @@ package dto;
 
 public class User {
 	private int id;
-	private String ime, grad, email, korisnickoIme, lozinka, brojKartice;
-	private boolean savjetnik, verifikovan;
+	private String first_name, city, email, username, password, cardNumber;
+	private boolean councelor, verified;
 
 	public User() {	}
 
-	public User(int id, String ime, String grad, String email, String korisnickoIme, String lozinka, String brojKartice, boolean savjetnik, boolean verifikovan) {
+	public User(int id, String firstName, String city, String email, String username, String password,
+			String cardNumber, boolean councelor, boolean verified) {
 		super();
 		this.id = id;
-		this.ime = ime;
-		this.grad = grad;
+		this.first_name = firstName;
+		this.city = city;
 		this.email = email;
-		this.korisnickoIme = korisnickoIme;
-		this.lozinka = lozinka;
-		this.brojKartice = brojKartice;
-		this.savjetnik = savjetnik;
-		this.verifikovan = verifikovan;
+		this.username = username;
+		this.password = password;
+		this.cardNumber = cardNumber;
+		this.councelor = councelor;
+		this.verified = verified;
 	}
+
 
 	public int getId() {
 		return id;
@@ -28,20 +30,20 @@ public class User {
 		this.id = id;
 	}
 
-	public String getIme() {
-		return ime;
+	public String getFirstName() {
+		return first_name;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
+	public void setFirstName(String first_name) {
+		this.first_name = first_name;
 	}
 
-	public String getGrad() {
-		return grad;
+	public String getCity() {
+		return city;
 	}
 
-	public void setGrad(String grad) {
-		this.grad = grad;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getEmail() {
@@ -52,44 +54,44 @@ public class User {
 		this.email = email;
 	}
 
-	public String getLozinka() {
-		return lozinka;
+	public String getUsername() {
+		return username;
 	}
 
-	public String getKorisnickoIme() {
-		return korisnickoIme;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setKorisnickoIme(String korisnickoIme) {
-		this.korisnickoIme = korisnickoIme;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setLozinka(String lozinka) {
-		this.lozinka = lozinka;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getBrojKartice() {
-		return brojKartice;
+	public String getCardNumber() {
+		return cardNumber;
 	}
 
-	public void setBrojKartice(String brojKartice) {
-		this.brojKartice = brojKartice;
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 
-	public boolean isSavjetnik() {
-		return savjetnik;
+	public boolean isCouncelor() {
+		return councelor;
 	}
 
-	public void setSavjetnik(boolean savjetnik) {
-		this.savjetnik = savjetnik;
+	public void setCouncelor(boolean councelor) {
+		this.councelor = councelor;
 	}
 
-	public boolean isVerifikovan() {
-		return verifikovan;
+	public boolean isVerified() {
+		return verified;
 	}
 
-	public void setVerifikovan(boolean verifikovan) {
-		this.verifikovan = verifikovan;
+	public void setVerified(boolean verified) {
+		this.verified = verified;
 	}
 
 }

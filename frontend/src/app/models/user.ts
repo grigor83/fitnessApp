@@ -1,33 +1,31 @@
-import { Kategorija } from "./kategorija";
+import { Category } from "./category";
 import { Message } from "./message";
 
 export class User {
 
-    korisnikId!: number;
-    ime: string;
-    grad: string; 
-    korisnickoIme: string;
-    lozinka: string;
-    mejl: string;
+    id!: number;
+    name: string;
+    city: string; 
+    username: string;
+    password: string;
+    mail: string;
     avatar: string|null;
-    brojKartice : string;
-    verifikovan : boolean;
-    savjetnik : boolean;
-    pretplata : Kategorija|null;
-    primljenePoruke: Message[];
+    cardNumber : string;
+    verified : boolean;
+    councelor : boolean;
+    recievedMessages: Message[];
 
-    constructor(ime : string, grad : string, korisnickoIme:string, lozinka:string, mejl : string, 
-                brojKartice : string, avatar : string|null) {
-        this.ime = ime;
-        this.grad = grad;
-        this.korisnickoIme = korisnickoIme;
-        this.lozinka = lozinka;
-        this.mejl = mejl;
-        this.brojKartice = brojKartice;
-        this.verifikovan = false;
-        this.savjetnik = false;
+    constructor(name : string, city : string, username:string, password:string, mail : string, 
+                cardNumber : string, avatar : string|null) {
+        this.name = name;
+        this.city = city;
+        this.username = username;
+        this.password = password;
+        this.mail = mail;
+        this.cardNumber = cardNumber;
+        this.verified = false;
+        this.councelor = false;
         this.avatar = avatar;
-        this.pretplata = null;
-        this.primljenePoruke = [];
+        this.recievedMessages = [];
     }
 }

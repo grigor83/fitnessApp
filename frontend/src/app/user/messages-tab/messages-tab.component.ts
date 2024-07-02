@@ -30,9 +30,9 @@ export class MessagesTabComponent {
 
   filterUsers() {
     this.userService.getAllUsers().subscribe(response => {
-      this.usersList = response.filter(user => !user.savjetnik);
-      this.usersList = this.usersList.filter(user => user.korisnikId!=this.userService.activeUser?.korisnikId);
-      this.counselorList = response.filter(user => user.savjetnik);
+      this.usersList = response.filter(user => !user.councelor);
+      this.usersList = this.usersList.filter(user => user.id!=this.userService.activeUser?.id);
+      this.counselorList = response.filter(user => user.councelor);
     });
     this.userService.getUsersMessages(this.userService.activeUser).subscribe(response => {
       this.receivedMessages = response;
@@ -42,10 +42,10 @@ export class MessagesTabComponent {
 
   sendMessage(event: Event, messagesForm : NgForm) {
     let message = new Message();
-    message.posiljalac = this.userService.activeUser;
-    message.primalac = this.selectedReceiver;
-    message.tekst = this.message;
-    message.datum = this.datepipe.transform(new Date(), 'dd.MM.yyyy. HH:mm');
+    message.sender = this.userService.activeUser;
+    message.reciever = this.selectedReceiver;
+    message.content = this.message;
+    message.date = this.datepipe.transform(new Date(), 'dd.MM.yyyy. HH:mm');
     this.userService.sendMessage(message).subscribe(response => {
     });
     this.message = [];

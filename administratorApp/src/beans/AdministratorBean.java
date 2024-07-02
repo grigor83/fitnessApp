@@ -18,8 +18,8 @@ public class AdministratorBean implements Serializable {
 		Administrator admin = null;
 		if ((admin = AdminDAO.selectByUsernameAndPassword(username, password)) != null) {
 			id = admin.getId();
-			username = admin.getKorisnickoIme();
-			password = admin.getLozinka();
+			username = admin.getUsername();
+			password = admin.getPassword();
 			isLoggedIn = true;
 			return true;
 		}

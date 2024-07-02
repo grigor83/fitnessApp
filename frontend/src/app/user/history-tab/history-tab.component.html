@@ -1,64 +1,64 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Naziv </th>
-        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.nazivPrograma}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.programName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef> Opis </th>
-        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.opis}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.description}} </td>
     </ng-container>
   
     <ng-container matColumnDef="category">
       <th mat-header-cell *matHeaderCellDef> Kategorija </th>
-      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.kategorija.nazivKategorije}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.category.categoryName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="location">
         <th mat-header-cell *matHeaderCellDef> Lokacija </th>
-        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.lokacija}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.location}} </td>
     </ng-container>
   
     <ng-container matColumnDef="time">
         <th mat-header-cell *matHeaderCellDef> Trajanje treninga </th>
-        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.trajanje}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.duration}} </td>
     </ng-container>
   
     <ng-container matColumnDef="difficulty">
       <th mat-header-cell *matHeaderCellDef> Nivo tezine </th>
-      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.nivoTezine}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.intensity}} </td>
   </ng-container>
   
   <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> Cijena </th>
-      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.cijena}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.price}} </td>
   </ng-container>
   
     <ng-container matColumnDef="instructor">
       <th mat-header-cell *matHeaderCellDef> Instruktor </th>
-      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.imeInstruktora}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.instructorName}} </td>
     </ng-container>
   
     <ng-container matColumnDef="contact">
       <th mat-header-cell *matHeaderCellDef> Kontakt </th>
-      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.kontakt}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fitnessProgram.instructorContact}} </td>
     </ng-container>
   
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef> Slika </th>
       <td mat-cell *matCellDef="let element"> 
-          <img height="50" width="100" [src]="element.fitnessProgram.nazivSlike" alt="-" *ngIf="element.fitnessProgram.nazivSlike" style="padding: 5px;"/>            
+          <img height="50" width="100" [src]="element.fitnessProgram.imagePath" alt="-" *ngIf="element.fitnessProgram.imagePath" style="padding: 5px;"/>            
       </td>
     </ng-container>
 
     <ng-container matColumnDef="paying">
         <th mat-header-cell *matHeaderCellDef> Način plaćanja </th>
-        <td mat-cell *matCellDef="let element"> {{element.nacinPlacanja}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.paymentMethod}} </td>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Datum plaćanja </th>
-        <td mat-cell *matCellDef="let element"> {{element.datum}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.paymentDate}} </td>
       </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

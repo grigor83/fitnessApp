@@ -1,37 +1,37 @@
-import { Kategorija } from "./kategorija";
+import { Category } from "./category";
 import { Comment } from "./comment";
 import { User } from "./user";
 
 export class FitnessProgram {
 
-    programId! : number;
-    nazivPrograma : string;
-    opis : string;
-    nazivSlike : string;
-    kategorija! : Kategorija;
-    lokacija : string;
-    trajanje : string;
-    nivoTezine : number;
-    cijena : number;
-    autor : User | null;
-    komentari : Comment[];
-    imeInstruktora : string;
-    kontakt : string;
+    id! : number;
+    programName : string;
+    description : string;
+    imagePath : string;
+    category! : Category;
+    location : string;
+    duration : string;
+    intensity : number;
+    price : number;
+    author : User | null;
+    comments : Comment[];
+    instructorName : string;
+    instructorContact : string;
 
-    constructor (nazivPrograma : string, opis : string, nazivSlike : string, kategorija : Kategorija, lokacija : string, trajanje : string,
-                    nivoTezine : number, cijena : number, imeInstruktora : string, kontakt : string, autor : User | null) {
-            this.nazivPrograma = nazivPrograma;
-            this.opis = opis;
-            this.kategorija = kategorija;
-            this.nazivSlike = nazivSlike;
-            this.lokacija = lokacija;
-            this.trajanje = trajanje;
-            this.nivoTezine = nivoTezine;
-            this.cijena = cijena;
-            this.komentari = [];
-            this.imeInstruktora = imeInstruktora;
-            this.kontakt = kontakt;
-            this.autor = autor;
+    constructor (name : string, description : string, imagePath : string, category : Category, location : string, duration : string,
+                    intensity : number, price : number, instructorName : string, instructorContact : string, author : User | null) {
+            this.programName = name;
+            this.description = description;
+            this.category = category;
+            this.imagePath = imagePath;
+            this.location = location;
+            this.duration = duration;
+            this.intensity = intensity;
+            this.price = price;
+            this.comments = [];
+            this.instructorName = instructorName;
+            this.instructorContact = instructorContact;
+            this.author = author;
     }
 
 }

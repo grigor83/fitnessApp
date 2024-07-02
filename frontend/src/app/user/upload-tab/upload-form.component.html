@@ -9,7 +9,7 @@
     <input type="text" ngModel name="opis" required>
     <label>Kategorija*: </label>
     <select ngModel name="kategorija" required>
-      <option *ngFor="let category of categoriesList" [value]="category.kategorijaId">{{ category.nazivKategorije + '-' + category.atribut.nazivAtributa }}</option>
+      <option *ngFor="let category of categoriesList" [value]="category.id">{{ category.categoryName + '-' + category.attribute.attributeName }}</option>
     </select>
     <label>Lokacija*: </label>
     <input type="text" ngModel name="lokacija" required> 

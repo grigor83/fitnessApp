@@ -12,13 +12,13 @@ import dto.User;
 public class UserDAO {
 
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
-	private static final String SELECT_ALL_USERS = "SELECT * FROM korisnik";
-	private static final String SELECT_USER = "SELECT * FROM korisnik WHERE korisnik_id = ?";
-	private static final String INSERT_NEW_USER = "INSERT INTO korisnik (ime, grad, mejl, korisnicko_ime, lozinka, broj_kartice, savjetnik, verifikovan) "
-												+ "VALUES (?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_USER = "UPDATE korisnik SET ime = ?, grad = ?, mejl = ?, korisnicko_ime = ?, lozinka = ?, broj_kartice = ?, "
-												+ " savjetnik = ?, verifikovan = ? WHERE korisnik_id = ?";
-	private static final String DELETE_USER = "DELETE FROM korisnik WHERE korisnik_id = ?";
+	private static final String SELECT_ALL_USERS = "SELECT * FROM user";
+	private static final String SELECT_USER = "SELECT * FROM user WHERE id = ?";
+	private static final String INSERT_NEW_USER = "INSERT INTO user (first_name, city, mail, username, user_password, "
+			+ "card_number, councelor, verified) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String UPDATE_USER = "UPDATE user SET first_name = ?, city = ?, mail = ?, username = ?, user_password = ?, "
+			+ "card_number = ?, councelor = ?, verified = ? WHERE id = ?";
+	private static final String DELETE_USER = "DELETE FROM user WHERE id = ?";
 
 
 	public static ArrayList<User> loadUsers() {
@@ -31,15 +31,15 @@ public class UserDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-	            int id = rs.getInt("korisnik_id");
-	            String ime = rs.getString("ime");
-	            String grad = rs.getString("grad");
-	            String mejl = rs.getString("mejl");
-	            String username = rs.getString("korisnicko_ime");
-	            String password = rs.getString("lozinka");
-	            String brojKartice = rs.getString("broj_kartice");
-	            boolean savjetnik = rs.getBoolean("savjetnik");
-	            boolean verifikovan = rs.getBoolean("verifikovan");
+	            int id = rs.getInt("id");
+	            String ime = rs.getString("first_name");
+	            String grad = rs.getString("city");
+	            String mejl = rs.getString("mail");
+	            String username = rs.getString("username");
+	            String password = rs.getString("user_password");
+	            String brojKartice = rs.getString("card_number");
+	            boolean savjetnik = rs.getBoolean("councelor");
+	            boolean verifikovan = rs.getBoolean("verified");
 	            users.add(new User(id, ime, grad, mejl, username, password, brojKartice, savjetnik, verifikovan));
 	        }
 			
@@ -85,15 +85,15 @@ public class UserDAO {
 			PreparedStatement pstmt = ConnectionPool.prepareStatement(connection, SELECT_USER, false, values);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				int id = rs.getInt("korisnik_id");
-	            String ime = rs.getString("ime");
-	            String grad = rs.getString("grad");
-	            String mejl = rs.getString("mejl");
-	            String username = rs.getString("korisnicko_ime");
-	            String password = rs.getString("lozinka");
-	            String brojKartice = rs.getString("broj_kartice");
-	            boolean savjetnik = rs.getBoolean("savjetnik");
-	            boolean verifikovan = rs.getBoolean("verifikovan");
+				int id = rs.getInt("id");
+	            String ime = rs.getString("first_name");
+	            String grad = rs.getString("city");
+	            String mejl = rs.getString("mail");
+	            String username = rs.getString("username");
+	            String password = rs.getString("user_password");
+	            String brojKartice = rs.getString("card_number");
+	            boolean savjetnik = rs.getBoolean("councelor");
+	            boolean verifikovan = rs.getBoolean("verified");
 	            selectedUser = new User(id, ime, grad, mejl, username, password, brojKartice, savjetnik, verifikovan);
 			}
 

@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FitnessProgram, FitnessProgramArray } from '../models/fitness-program';
 import { Comment } from '../models/comment';
-import { Kategorija } from '../models/kategorija';
+import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProgramService {
 
-  private url = 'http://localhost:8080/program';
+  private url = 'http://localhost:8080/programs';
 
   constructor(private httpClient: HttpClient) { }
   
@@ -45,7 +45,7 @@ export class ProgramService {
     //const headers = new HttpHeaders();
     // headers.append('Authorization', 'Bearer <token>');
 
-     return this.httpClient.post<FitnessProgram>(this.url+"/upload", formData);
+     return this.httpClient.post<FitnessProgram>(this.url, formData);
   }
 
   updateProgram(fitnessProgram: FitnessProgram, image: File): Observable<FitnessProgram> {
@@ -56,19 +56,19 @@ export class ProgramService {
       return this.httpClient.put<FitnessProgram>(this.url, formData);
     }
     else
-      return this.httpClient.put<FitnessProgram>(`${this.url}/${fitnessProgram.programId}`, fitnessProgram);    
+      return this.httpClient.put<FitnessProgram>(`${this.url}/${fitnessProgram.id}`, fitnessProgram);    
   }
-
+  
   deleteProgram(id : number): Observable<string> {
     return this.httpClient.delete<string>(`${this.url}/${id}`);
   }
 
-  uploadComment(komentar : Comment) {
-    return this.httpClient.post<FitnessProgram>('http://localhost:8080/komentar', komentar);
+  uploadComment(comment : Comment) {
+    return this.httpClient.post<FitnessProgram>('http://localhost:8080/comments', comment);
   }
 
-  getCategories() : Observable<Kategorija[]> {
-    const url = 'http://localhost:8080/kategorija';
-    return this.httpClient.get<Kategorija[]>(url);
+  getCategories() : Observable<Category[]> {
+    const url = 'http://localhost:8080/categories';
+    return this.httpClient.get<Category[]>(url);
   }
 }

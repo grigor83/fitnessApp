@@ -1,6 +1,6 @@
 <%@page import="dto.Atribut"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <jsp:useBean id="selectedCategory" class="dto.Category" scope="session"></jsp:useBean>
 <jsp:useBean id="attributesBean" class="beans.AttributesBeans" scope="session"></jsp:useBean>
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 	<title>Izmijeni kategoriju</title>
 	<link rel="stylesheet" href="style.css">
 </head>
@@ -26,16 +26,16 @@
 				<div>
 					<label>Naziv kategorije: </label>
     				<input type="text" name="nazivKategorije" autofocus="autofocus" required
-    				value="<%= selectedCategory.getNazivKategorije() %>" >
+    				value="<%= selectedCategory.getCategoryName() %>" >
 				</div>
 				<div>
 					<label>Atribut kategorije: </label>
 					<select name="atributi" required>
-						<option value="<%=selectedCategory.getAtributId() %>" selected><%=selectedCategory.getNazivAtributa() %></option>
+						<option value="<%=selectedCategory.getAttributeId() %>" selected><%=selectedCategory.getAttributeName() %></option>
 						<%
 							for (Atribut atribut : attributesBean.getAtributes()) {
 						%> 
-							<option value="<%=atribut.getAtributId() %>"> <%=atribut.getNazivAtributa() %> </option>
+							<option value="<%=atribut.getId() %>"> <%=atribut.getAttributeName() %> </option>
 						<% } %>
 					</select>
 				</div>

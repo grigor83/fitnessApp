@@ -3,24 +3,24 @@
 <div class="col-container main-container" style="height: calc(100% - 50px);  padding-top: 50px;">    
     <div class="row-container" style="background-color: lightslategray; width: 100%;">
         <div class="col-container" style="width: calc (25% - 10px); align-items: flex-start;">
-            <div class="row-container"><h3>Naziv programa:</h3><label>{{ fitnesProgram.nazivPrograma }}</label></div>
-            <div class="row-container"><h3>Lokacija:</h3><label>{{ fitnesProgram.lokacija }}</label></div>
-            <div class="row-container"><h3>Kategorija:</h3><label>{{ fitnesProgram.kategorija.nazivKategorije }}</label></div>
-            <div class="row-container"><h3>Instruktor:</h3><label>{{ fitnesProgram.imeInstruktora }}</label></div>
-            <div class="row-container"><h3>Kontakt:</h3><label>{{ fitnesProgram.kontakt }}</label></div>
+            <div class="row-container"><h3>Naziv programa:</h3><label>{{ fitnesProgram.programName }}</label></div>
+            <div class="row-container"><h3>Lokacija:</h3><label>{{ fitnesProgram.location }}</label></div>
+            <div class="row-container"><h3>Kategorija:</h3><label>{{ fitnesProgram.category.categoryName }}</label></div>
+            <div class="row-container"><h3>Instruktor:</h3><label>{{ fitnesProgram.instructorName }}</label></div>
+            <div class="row-container"><h3>Kontakt:</h3><label>{{ fitnesProgram.instructorContact }}</label></div>
         </div>
 
         <div class="col-container" style="width: 50%; height: 300px; margin:10px;">
-            <img [src]="fitnesProgram.nazivSlike" style="width: 100%; height: 100%; object-fit: contain;">
+            <img [src]="fitnesProgram.imagePath" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
 
         <div class="col-container" style="width: calc (25% - 10px); align-items: flex-start;">
-            <div class="row-container"><h3>Opis programa:</h3><textarea >{{ fitnesProgram.opis }}</textarea></div>
-            <div class="row-container"><h3>Trajanje treninga:</h3><label>{{ fitnesProgram.trajanje }}</label></div>
-            <div class="row-container"><h3>Atribut:</h3><label>{{ fitnesProgram.kategorija.atribut.nazivAtributa }}</label></div>
-            <div class="row-container"><h3>Cijena:</h3><label>{{ fitnesProgram.cijena }} KM</label></div>
+            <div class="row-container"><h3>Opis programa:</h3><textarea >{{ fitnesProgram.description }}</textarea></div>
+            <div class="row-container"><h3>Trajanje treninga:</h3><label>{{ fitnesProgram.duration }}</label></div>
+            <div class="row-container"><h3>Atribut:</h3><label>{{ fitnesProgram.category.attribute.attributeName }}</label></div>
+            <div class="row-container"><h3>Cijena:</h3><label>{{ fitnesProgram.price }} KM</label></div>
             <div class="row-container">
-                <h3>Autor:</h3><label>{{ fitnesProgram.autor?.ime || 'administrator' }}</label>            
+                <h3>Autor:</h3><label>{{ fitnesProgram.author?.name || 'administrator' }}</label>            
             </div>
         </div>
     </div>
@@ -29,8 +29,8 @@
         <div class="col-container" style="min-height: 90%; max-height: 90%;">
             <h3 style="margin: 0px;">Komentari</h3>
             <ul style="width: 50%;">
-                <app-karta *ngFor="let komentar of fitnesProgram.komentari" 
-                            [komentar]="komentar.tekst" [datum]="komentar.datum" [ime]="komentar.korisnik.ime">
+                <app-karta *ngFor="let komentar of fitnesProgram.comments" 
+                            [komentar]="komentar.content" [datum]="komentar.date" [ime]="komentar.user.name">
                 </app-karta>
             </ul>
             <div class="row-container" style="align-items: flex-end;">

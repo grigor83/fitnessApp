@@ -171,7 +171,7 @@ public class ServletController extends HttpServlet {
 				String verifikovan = request.getParameter("verifikovan");
 				
 				User user = (User) session.getAttribute("selectedUser");
-				if (UserDAO.updateUser(user.getId(), ime, grad, email, username, password, user.getBrojKartice(), Boolean.parseBoolean(savjetnik), Boolean.parseBoolean(verifikovan))) {
+				if (UserDAO.updateUser(user.getId(), ime, grad, email, username, password, user.getCardNumber(), Boolean.parseBoolean(savjetnik), Boolean.parseBoolean(verifikovan))) {
 					UsersBean usersBean = (UsersBean) session.getAttribute("usersBean");
 					usersBean.setUsers(UserDAO.loadUsers());
 					session.removeAttribute("selectedUser");

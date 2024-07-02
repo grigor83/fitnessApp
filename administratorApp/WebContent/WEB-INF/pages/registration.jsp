@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
 		<title>Registracija</title>
 		<link rel="stylesheet" href="style.css">
 	</head>
@@ -27,7 +27,7 @@
     				<input type="text" name="lastname"  required>
 				</div>
 				<div>
-					<label>Korisnicko ime: </label>
+					<label>Korisničko ime: </label>
     				<input type="text" name="username" required>
 				</div>
 				<div>

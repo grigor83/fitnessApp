@@ -21,7 +21,7 @@ public class UsersBean implements Serializable {
 	
 	public boolean isUsernameDuplicate(String username) {
 		User u = users.stream()
-				 .filter(user -> user.getKorisnickoIme().equals(username))
+				 .filter(user -> user.getUsername().equals(username))
 				 .findAny().orElse(null);
 		if (u != null)
 			return true;
